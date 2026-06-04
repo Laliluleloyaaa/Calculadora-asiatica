@@ -510,7 +510,7 @@ function noteHalfWin(odds){
   return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>El cálculo se realiza con base en la cuota, ya que representa la ganancia potencial.<ul><li>Si la cuota empieza con <strong>1</strong>, la mitad se calcula sobre los decimales.<br>🧾 Ejemplo: cuota 1.64 → mitad = 1.32</li><li>Si la cuota empieza con <strong>2 o más</strong>, la mitad se calcula sobre el total.<br>🧾 Ejemplo: cuota 2.60 → mitad = 1.30</li></ul>${ex}</div>`;
 }
 function noteHalfLose(){
-  return `<div class="note-box"><strong>ℹ️ Cómo funciona "Pierde la Mitad"</strong>Cuando el resultado de tu apuesta es "Pierde la mitad", el reembolso se calcula sobre el importe total apostado. La cuota pasará automáticamente a <strong>0.50</strong>, lo que equivale al <strong>50% de retorno</strong> del valor apostado.</div>`;
+  return `<div class="note-box"><strong>ℹ️ Cómo funciona "Pierde la Mitad"</strong>Cuando el resultado de tu apuesta es "Pierde la mitad", el reembolso se calcula sobre el importe total apostado. La cuota pasará automáticamente a <strong>0.50</strong><br>lo que equivale al <strong>50% de retorno del valor apostado.</strong></div>`;
 }
 function renderResult(id,verdict,odds){
   const v=VERDICTS[verdict];
