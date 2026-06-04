@@ -497,7 +497,14 @@ function noteHalfWin(odds){
   odds=parseFloat(odds);
   let ex='';
   if(!isNaN(odds)&&odds>=1){
-    const half=1+(odds-1)/2;
+    let half;
+    if(odds>=1&&odds<2){
+      // cuota 1.x: mitad se calcula sobre los decimales
+      half=1+(odds-1)/2;
+    } else {
+      // cuota 2 o más: mitad es el total dividido entre 2
+      half=odds/2;
+    }
     ex=`<br><br>Con tu cuota <strong>${odds.toFixed(2)}</strong>: cuota efectiva → <strong>${half.toFixed(2)}</strong>`;
   }
   return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>El cálculo se realiza con base en la cuota, ya que representa la ganancia potencial.<ul><li>Si la cuota empieza con <strong>1</strong>, la mitad se calcula sobre los decimales.<br>🧾 Ejemplo: cuota 1.64 → mitad = 1.32</li><li>Si la cuota empieza con <strong>2 o más</strong>, la mitad se calcula sobre el total.<br>🧾 Ejemplo: cuota 2.60 → mitad = 1.30</li></ul>${ex}</div>`;
