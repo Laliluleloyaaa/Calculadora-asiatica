@@ -11,6 +11,31 @@
     --accent:#00c896;--accent2:#0097ff;--accent3:#b06cff;--text:#e8ecf4;--muted:#6b7591;
     --win:#00c896;--lose:#ff4f6a;--half:#ffb547;--push:#0097ff;
   }
+  body.light {
+    --bg:#f0f2f7;--surface:#ffffff;--surface2:#e8ecf4;--border:#d0d7e8;
+    --text:#1a1f2e;--muted:#6b7591;
+  }
+  body.light .ref-table th{background:#1c2e50;color:#c8d8f0}
+  body.light .ref-table .lc{background:#e8ecf4}
+  body.light .ew-narrative{background:rgba(255,183,71,0.08);color:#3a3a3a}
+  body.light .ew-narrative strong{color:#1a1f2e}
+  body.light .note-box{color:#3a3a3a}
+  body.light .note-box strong{color:#b07a00}
+  body.light select,body.light input[type=number],body.light input[type=text]{background:#f8f9fc;color:#1a1f2e;border-color:#d0d7e8}
+  body.light .ew-table input[type=number],body.light .ew-table input[type=text]{background:#f8f9fc;color:#1a1f2e}
+  body.light .ew-table input.readonly{background:#eef0f7;color:#b07a00}
+  body.light .result-body{background:#f0f2f7}
+  body.light .res-win{background:rgba(0,150,100,0.06)}
+  body.light .res-lose{background:rgba(200,50,80,0.06)}
+  body.light .res-half-win,.light .res-half-lose{background:rgba(200,140,0,0.06)}
+  body.light .res-push{background:rgba(0,100,200,0.06)}
+
+  /* HEADER CONTROLS */
+  .header-controls{display:flex;align-items:center;gap:10px;margin-left:auto}
+  .btn-theme{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1.1rem;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .btn-theme:hover{border-color:var(--accent)}
+  .btn-reset{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:0 14px;height:38px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s}
+  .btn-reset:hover{border-color:var(--lose);color:var(--lose)}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:0 0 60px}
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:28px 40px 24px;display:flex;align-items:flex-end;gap:16px}
@@ -99,6 +124,10 @@
   <div>
     <h1>CALCULADORA <span>HANDICAPS</span> / EACHWAY</h1>
     <p>Hándicap Asiático · Totales Asiáticos · Handicap 3 Way · Each Way</p>
+  </div>
+  <div class="header-controls">
+    <button class="btn-reset" onclick="resetAll()" title="Limpiar todos los campos">↺ Limpiar</button>
+    <button class="btn-theme" onclick="toggleTheme()" id="theme-btn" title="Cambiar modo">🌙</button>
   </div>
 </header>
 <div class="tabs">
@@ -1179,6 +1208,49 @@ function calcEW_PE(){
   setCard('pe-c-total', fmtPEN(total)+' Soles');
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'Soles',fmtPEN,odds.toFixed(2),frac);
   cards.style.display='block';
+}
+/* ── THEME ── */
+function toggleTheme(){
+  const body=document.body;
+  const btn=document.getElementById('theme-btn');
+  body.classList.toggle('light');
+  btn.textContent=body.classList.contains('light')?'🌑':'🌙';
+}
+
+/* ── RESET ── */
+function resetAll(){
+  // Inputs de número y texto
+  document.querySelectorAll('input[type=number],input[type=text]').forEach(el=>{
+    if(!el.readOnly) el.value='';
+  });
+  // Selects volver a primera opción
+  document.querySelectorAll('select').forEach(el=>{ el.selectedIndex=0; });
+  // Ocultar todos los result-box
+  document.querySelectorAll('.result-box').forEach(el=>{ el.style.display='none'; el.innerHTML=''; });
+  // Ocultar cards de EachWay
+  ['co-cards','mx-cards','pe-cards'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+  // Limpiar narrativos EachWay
+  ['co-narrative','mx-narrative','pe-narrative'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerHTML='';
+  });
+  // Limpiar tarjetas EachWay
+  document.querySelectorAll('[id$="-c-each-g"],[id$="-c-each-c"],[id$="-c-odds-g"],[id$="-c-odds-c"],[id$="-c-pay-g"],[id$="-c-pay-c"],[id$="-c-total"]').forEach(el=>{
+    el.textContent='—';
+  });
+  // Ocultar lookup results
+  ['h-lookup-result','t-lookup-result'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+  // Reset score inputs
+  ['h-home','h-away','w-home','w-away'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='0';
+  });
 }
 </script>
 </body>
