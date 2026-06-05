@@ -112,10 +112,10 @@
 <div id="tab-handicap" class="tab-content active">
 
   <div class="ref-card">
-    <div class="ref-toggle-title open" onclick="toggleRef('href',this)">
+    <div class="ref-toggle-title" onclick="toggleRef('href',this)">
       📋 TABLA DE REFERENCIA — HÁNDICAP ASIÁTICO <span class="arrow">▼</span>
     </div>
-    <div id="href" class="ref-table-wrap">
+    <div id="href" class="ref-table-wrap hidden">
       <div class="ref-split">
         <table class="ref-table">
           <thead><tr><th>Hándicap −</th><th>Resultado equipo</th><th>Apuesta</th></tr></thead>
@@ -259,8 +259,31 @@
     </div>
   </div>
 
-  <div class="calc-card">
-    <h2><span class="dot"></span>Calculadora Hándicap Asiático</h2>
+  <!-- QUICK LOOKUP HANDICAP -->
+  <div class="ref-card" style="padding:20px 28px">
+    <div style="font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">🔍 Consulta rápida de hándicap</div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <div class="select-wrap" style="flex:1;min-width:160px">
+        <select id="h-lookup-line" onchange="hLookup()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:10px 14px;width:100%;outline:none;appearance:none;-webkit-appearance:none">
+          <option value="">Selecciona un hándicap…</option>
+          <option value="0">0</option>
+          <option value="-0.25">−0.25</option><option value="-0.5">−0.5</option><option value="-0.75">−0.75</option>
+          <option value="-1">−1.00</option><option value="-1.25">−1.25</option><option value="-1.5">−1.5</option><option value="-1.75">−1.75</option>
+          <option value="-2">−2.00</option><option value="-2.25">−2.25</option><option value="-2.5">−2.5</option><option value="-2.75">−2.75</option>
+          <option value="-3">−3.00</option><option value="-3.25">−3.25</option><option value="-3.5">−3.5</option><option value="-3.75">−3.75</option>
+          <option value="-4">−4.00</option>
+          <option value="+0.25">+0.25</option><option value="+0.5">+0.5</option><option value="+0.75">+0.75</option>
+          <option value="+1">+1.00</option><option value="+1.25">+1.25</option><option value="+1.5">+1.5</option><option value="+1.75">+1.75</option>
+          <option value="+2">+2.00</option><option value="+2.25">+2.25</option><option value="+2.5">+2.5</option><option value="+2.75">+2.75</option>
+          <option value="+3">+3.00</option><option value="+3.25">+3.25</option><option value="+3.5">+3.5</option><option value="+3.75">+3.75</option>
+          <option value="+4">+4.00</option>
+        </select>
+      </div>
+    </div>
+    <div id="h-lookup-result" style="margin-top:14px;display:none">
+      <table class="ref-table" id="h-lookup-table" style="min-width:unset"></table>
+    </div>
+  </div>
     <div class="section-label">Resultado del partido</div>
     <div class="score-row">
       <div class="score-col"><input type="number" id="h-home" value="0" min="0" max="20"><div class="score-label">Local</div></div>
@@ -303,10 +326,10 @@
 <div id="tab-totals" class="tab-content">
 
   <div class="ref-card">
-    <div class="ref-toggle-title open" onclick="toggleRef('tref',this)">
+    <div class="ref-toggle-title" onclick="toggleRef('tref',this)">
       📋 TABLA DE REFERENCIA — TOTALES ASIÁTICOS (GOLES) <span class="arrow">▼</span>
     </div>
-    <div id="tref" class="ref-table-wrap">
+    <div id="tref" class="ref-table-wrap hidden">
       <div class="ref-split">
         <table class="ref-table">
           <thead><tr><th>Línea MÁS (Over)</th><th>Goles</th><th>Resultado</th></tr></thead>
@@ -444,8 +467,31 @@
     </div>
   </div>
 
-  <div class="calc-card">
-    <h2><span class="dot blue"></span>Calculadora Totales Asiáticos</h2>
+  <!-- QUICK LOOKUP TOTALES -->
+  <div class="ref-card" style="padding:20px 28px">
+    <div style="font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">🔍 Consulta rápida de totales</div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <div class="select-wrap" style="flex:1;min-width:160px">
+        <select id="t-lookup-line" onchange="tLookup()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:10px 14px;width:100%;outline:none;appearance:none;-webkit-appearance:none">
+          <option value="">Selecciona una línea…</option>
+          <option value="0.5">0.5</option><option value="0.75">0.75</option>
+          <option value="1">1</option><option value="1.25">1.25</option>
+          <option value="1.5">1.5</option><option value="1.75">1.75</option>
+          <option value="2">2</option><option value="2.25">2.25</option>
+          <option value="2.5">2.5</option><option value="2.75">2.75</option>
+          <option value="3">3</option><option value="3.25">3.25</option>
+          <option value="3.5">3.5</option><option value="3.75">3.75</option>
+          <option value="4">4</option><option value="4.25">4.25</option>
+          <option value="4.5">4.5</option><option value="4.75">4.75</option>
+          <option value="5">5</option><option value="5.25">5.25</option>
+          <option value="5.75">5.75</option><option value="6">6</option>
+        </select>
+      </div>
+    </div>
+    <div id="t-lookup-result" style="margin-top:14px;display:none">
+      <table class="ref-table" id="t-lookup-table" style="min-width:unset"></table>
+    </div>
+  </div>
     <div class="section-label">Goles totales en el partido</div>
     <div class="form-row">
       <div class="form-group"><label>Goles marcados</label><input type="number" id="t-goals" placeholder="Ej: 2" min="0" max="30" value=""></div>
@@ -875,25 +921,45 @@ function calc3Way(){
   else adjResult='away';
   const box=document.getElementById('w-result');
   const labels={home:'Local',draw:'Empate',away:'Visitante'};
+  const favLabel=favteam==='home'?'Local':'Visitante';
   const win=adjResult===bet;
   const cls=win?'res-win':'res-lose';
   const badge=win?'✅ Apuesta ganada':'❌ Apuesta perdida';
   const verdict=win?'GANAS':'PIERDES';
   const resultColor=win?'var(--win)':'var(--lose)';
+
+  // Paso a paso del hándicap
+  const stepArrow = `<span style="color:var(--muted);font-size:.9rem">→</span>`;
+  const plusSign = `<span style="color:#b06cff;font-weight:700">+${hcap}</span>`;
+
   box.innerHTML=`
     <div class="result-header">RESULTADO &nbsp;<span class="badge">${badge}</span></div>
     <div class="result-body">
       <div class="result-verdict">${verdict}</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+
+      <!-- Paso a paso -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:12px">
+        <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:#b06cff;font-weight:700;margin-bottom:10px">⚙️ Cómo se aplicó el hándicap</div>
+        <div style="font-size:.88rem;color:#c8d0e0;line-height:2">
+          Marcador real: <strong style="color:#ffffff">${home} – ${away}</strong>
+          &nbsp;${stepArrow}&nbsp;
+          ${favLabel} recibe ${plusSign}
+          &nbsp;${stepArrow}&nbsp;
+          Marcador ajustado: <strong style="color:#ffffff">${adjHome} – ${adjAway}</strong>
+        </div>
+      </div>
+
+      <!-- Tarjetas resultado vs apuesta -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
-          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Marcador ajustado</div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Resultado ajustado</div>
           <div style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:#ffffff">${adjHome} – ${adjAway}</div>
-          <div style="font-size:.8rem;color:#c8d0e0;margin-top:4px">Resultado: <strong style="color:#ffffff">${labels[adjResult]}</strong></div>
+          <div style="font-size:.82rem;color:#c8d0e0;margin-top:4px">Gana: <strong style="color:#ffffff">${labels[adjResult]}</strong></div>
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
           <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Tu apuesta</div>
           <div style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:#ffffff">${labels[bet]}</div>
-          <div style="font-size:.8rem;margin-top:4px;font-weight:700;color:${resultColor}">${win?'✅ Coincide':'❌ No coincide'}</div>
+          <div style="font-size:.82rem;margin-top:4px;font-weight:700;color:${resultColor}">${win?'✅ Coincide':'❌ No coincide'}</div>
         </div>
       </div>
     </div>`;
@@ -932,6 +998,97 @@ function setFmt(id,val,fmtFn){
 
 
 function setCard(id,val){ const el=document.getElementById(id); if(el) el.textContent=val; }
+/* ── QUICK LOOKUP ── */
+const H_DATA = {
+  '0':     [{r:'Gana',v:'rg'},{r:'Empata',v:'ra'},{r:'Pierde',v:'rp'}],
+  '-0.25': [{r:'Gana',v:'rg'},{r:'Empata',v:'rpm'},{r:'Pierde',v:'rp'}],
+  '-0.5':  [{r:'Gana',v:'rg'},{r:'Empata',v:'rp'},{r:'Pierde',v:'rp'}],
+  '-0.75': [{r:'Gana por 2+',v:'rg'},{r:'Gana por 1',v:'rgm'},{r:'Empata',v:'rp'},{r:'Pierde',v:'rp'}],
+  '-1':    [{r:'Gana por 2+',v:'rg'},{r:'Gana por 1',v:'ra'},{r:'Empata/Pierde',v:'rp'}],
+  '-1.25': [{r:'Gana por 2+',v:'rg'},{r:'Gana por 1',v:'rpm'},{r:'Empata/Pierde',v:'rp'}],
+  '-1.5':  [{r:'Gana por 2+',v:'rg'},{r:'Gana por 1',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-1.75': [{r:'Gana por 3+',v:'rg'},{r:'Gana por 2',v:'rgm'},{r:'Gana por 1',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-2':    [{r:'Gana por 3+',v:'rg'},{r:'Gana por 2',v:'ra'},{r:'Gana por 1',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-2.25': [{r:'Gana por 3+',v:'rg'},{r:'Gana por 2',v:'rpm'},{r:'Gana por 1',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-2.5':  [{r:'Gana por 3+',v:'rg'},{r:'Gana por 2',v:'rp'},{r:'Gana por 1',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-2.75': [{r:'Gana por 4+',v:'rg'},{r:'Gana por 3',v:'rgm'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-3':    [{r:'Gana por 4+',v:'rg'},{r:'Gana por 3',v:'ra'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-3.25': [{r:'Gana por 4+',v:'rg'},{r:'Gana por 3',v:'rpm'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-3.5':  [{r:'Gana por 4+',v:'rg'},{r:'Gana por 3',v:'rp'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-3.75': [{r:'Gana por 5+',v:'rg'},{r:'Gana por 4',v:'rgm'},{r:'Gana por 3',v:'rp'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '-4':    [{r:'Gana por 5+',v:'rg'},{r:'Gana por 4',v:'ra'},{r:'Gana por 3',v:'rp'},{r:'Gana por 1-2',v:'rp'},{r:'Empata/Pierde',v:'rp'}],
+  '+0.25': [{r:'Gana',v:'rg'},{r:'Empata',v:'rgm'},{r:'Pierde',v:'rp'}],
+  '+0.5':  [{r:'Gana',v:'rg'},{r:'Empata',v:'rg'},{r:'Pierde',v:'rp'}],
+  '+0.75': [{r:'Gana',v:'rg'},{r:'Empata',v:'rg'},{r:'Pierde por 1',v:'rpm'},{r:'Pierde por 2+',v:'rp'}],
+  '+1':    [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'ra'},{r:'Pierde por 2+',v:'rp'}],
+  '+1.25': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rgm'},{r:'Pierde por 2+',v:'rp'}],
+  '+1.5':  [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rg'},{r:'Pierde por 2+',v:'rp'}],
+  '+1.75': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rg'},{r:'Pierde por 2',v:'rpm'},{r:'Pierde por 3+',v:'rp'}],
+  '+2':    [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rg'},{r:'Pierde por 2',v:'ra'},{r:'Pierde por 3+',v:'rp'}],
+  '+2.25': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rg'},{r:'Pierde por 2',v:'rgm'},{r:'Pierde por 3+',v:'rp'}],
+  '+2.5':  [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1',v:'rg'},{r:'Pierde por 2',v:'rg'},{r:'Pierde por 3+',v:'rp'}],
+  '+2.75': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'rpm'},{r:'Pierde por 4+',v:'rp'}],
+  '+3':    [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'ra'},{r:'Pierde por 4+',v:'rp'}],
+  '+3.25': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'rgm'},{r:'Pierde por 4+',v:'rp'}],
+  '+3.5':  [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'rg'},{r:'Pierde por 4+',v:'rp'}],
+  '+3.75': [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'rg'},{r:'Pierde por 4',v:'rpm'},{r:'Pierde por 5+',v:'rp'}],
+  '+4':    [{r:'Gana/Empata',v:'rg'},{r:'Pierde por 1-2',v:'rg'},{r:'Pierde por 3',v:'rg'},{r:'Pierde por 4',v:'ra'},{r:'Pierde por 5+',v:'rp'}],
+};
+const VLABELS = {rg:'Ganas',rp:'Pierdes',rgm:'Ganas la mitad',rpm:'Pierdes la mitad',ra:'Se anula la línea'};
+
+function hLookup(){
+  const line=document.getElementById('h-lookup-line').value;
+  const box =document.getElementById('h-lookup-result');
+  const tbl =document.getElementById('h-lookup-table');
+  if(!line){box.style.display='none';return;}
+  const rows=H_DATA[line];
+  if(!rows){box.style.display='none';return;}
+  const side=line.startsWith('+')||line==='0'?'Hándicap +':'Hándicap −';
+  tbl.innerHTML=`<thead><tr><th>${side}</th><th>Resultado del equipo</th><th>Resultado apuesta</th></tr></thead><tbody>`+
+    rows.map((row,i)=>`<tr>${i===0?`<td class="lc ${line.startsWith('+')?'p':'n'}" rowspan="${rows.length}">${line}</td>`:''}<td>${row.r}</td><td class="${row.v}">${VLABELS[row.v]}</td></tr>`).join('')+
+    '</tbody>';
+  box.style.display='block';
+}
+
+const T_DATA = {
+  '0.5': {over:[{g:'0',v:'rp'},{g:'1 o más',v:'rg'}],under:[{g:'0',v:'rg'},{g:'1',v:'rp'}]},
+  '0.75':{over:[{g:'0',v:'rp'},{g:'1',v:'rgm'},{g:'2 o más',v:'rg'}],under:[{g:'0',v:'rg'},{g:'1',v:'rpm'},{g:'2 o más',v:'rp'}]},
+  '1':   {over:[{g:'0',v:'rp'},{g:'1',v:'ra'},{g:'2 o más',v:'rg'}],under:[{g:'0',v:'rg'},{g:'1',v:'ra'},{g:'2 o más',v:'rp'}]},
+  '1.25':{over:[{g:'0',v:'rp'},{g:'1',v:'rpm'},{g:'2 o más',v:'rg'}],under:[{g:'0',v:'rg'},{g:'1',v:'rgm'},{g:'2 o más',v:'rp'}]},
+  '1.5': {over:[{g:'1 o menos',v:'rp'},{g:'2 o más',v:'rg'}],under:[{g:'1 o menos',v:'rg'},{g:'2 o más',v:'rp'}]},
+  '1.75':{over:[{g:'1 o menos',v:'rp'},{g:'2',v:'rgm'},{g:'3 o más',v:'rg'}],under:[{g:'1 o menos',v:'rg'},{g:'2',v:'rpm'},{g:'3 o más',v:'rp'}]},
+  '2':   {over:[{g:'1 o menos',v:'rp'},{g:'2',v:'ra'},{g:'3 o más',v:'rg'}],under:[{g:'1 o menos',v:'rg'},{g:'2',v:'ra'},{g:'3 o más',v:'rp'}]},
+  '2.25':{over:[{g:'1 o menos',v:'rp'},{g:'2',v:'rpm'},{g:'3 o más',v:'rg'}],under:[{g:'1 o menos',v:'rg'},{g:'2',v:'rgm'},{g:'3 o más',v:'rp'}]},
+  '2.5': {over:[{g:'2 o menos',v:'rp'},{g:'3 o más',v:'rg'}],under:[{g:'2 o menos',v:'rg'},{g:'3 o más',v:'rp'}]},
+  '2.75':{over:[{g:'2 o menos',v:'rp'},{g:'3',v:'rgm'},{g:'4 o más',v:'rg'}],under:[{g:'2 o menos',v:'rg'},{g:'3',v:'rpm'},{g:'4 o más',v:'rp'}]},
+  '3':   {over:[{g:'2 o menos',v:'rp'},{g:'3',v:'ra'},{g:'4 o más',v:'rg'}],under:[{g:'2 o menos',v:'rg'},{g:'3',v:'ra'},{g:'4 o más',v:'rp'}]},
+  '3.25':{over:[{g:'2 o menos',v:'rp'},{g:'3',v:'rpm'},{g:'4 o más',v:'rg'}],under:[{g:'2 o menos',v:'rg'},{g:'3',v:'rgm'},{g:'4 o más',v:'rp'}]},
+  '3.5': {over:[{g:'3 o menos',v:'rp'},{g:'4 o más',v:'rg'}],under:[{g:'3 o menos',v:'rg'},{g:'4 o más',v:'rp'}]},
+  '3.75':{over:[{g:'3 o menos',v:'rp'},{g:'4',v:'rgm'},{g:'5 o más',v:'rg'}],under:[{g:'3 o menos',v:'rg'},{g:'4',v:'rpm'},{g:'5 o más',v:'rp'}]},
+  '4':   {over:[{g:'3 o menos',v:'rp'},{g:'4',v:'ra'},{g:'5 o más',v:'rg'}],under:[{g:'3 o menos',v:'rg'},{g:'4',v:'ra'},{g:'5 o más',v:'rp'}]},
+  '4.25':{over:[{g:'3 o menos',v:'rp'},{g:'4',v:'rpm'},{g:'5 o más',v:'rg'}],under:[{g:'3 o menos',v:'rg'},{g:'4',v:'rgm'},{g:'5 o más',v:'rp'}]},
+  '4.5': {over:[{g:'4 o menos',v:'rp'},{g:'5 o más',v:'rg'}],under:[{g:'4 o menos',v:'rg'},{g:'5 o más',v:'rp'}]},
+  '4.75':{over:[{g:'4 o menos',v:'rp'},{g:'5',v:'rgm'},{g:'6 o más',v:'rg'}],under:[{g:'4 o menos',v:'rg'},{g:'5',v:'rpm'},{g:'6 o más',v:'rp'}]},
+  '5':   {over:[{g:'4 o menos',v:'rp'},{g:'5',v:'ra'},{g:'6 o más',v:'rg'}],under:[{g:'4 o menos',v:'rg'},{g:'5',v:'ra'},{g:'6 o más',v:'rp'}]},
+  '5.25':{over:[{g:'4 o menos',v:'rp'},{g:'5',v:'rpm'},{g:'6 o más',v:'rg'}],under:[{g:'4 o menos',v:'rg'},{g:'5',v:'rgm'},{g:'6 o más',v:'rp'}]},
+  '5.75':{over:[{g:'5 o menos',v:'rp'},{g:'6',v:'rgm'},{g:'7 o más',v:'rg'}],under:[{g:'5 o menos',v:'rg'},{g:'6',v:'rpm'},{g:'7 o más',v:'rp'}]},
+  '6':   {over:[{g:'5 o menos',v:'rp'},{g:'6',v:'ra'},{g:'7 o más',v:'rg'}],under:[{g:'5 o menos',v:'rg'},{g:'6',v:'ra'},{g:'7 o más',v:'rp'}]},
+};
+
+function tLookup(){
+  const line=document.getElementById('t-lookup-line').value;
+  const box =document.getElementById('t-lookup-result');
+  const tbl =document.getElementById('t-lookup-table');
+  if(!line){box.style.display='none';return;}
+  const d=T_DATA[line];
+  if(!d){box.style.display='none';return;}
+  const makeRows=(rows,label)=>rows.map((row,i)=>
+    `<tr>${i===0?`<td class="lc p" rowspan="${rows.length}">${label} ${line}</td>`:''}<td>${row.g}</td><td class="${row.v}">${VLABELS[row.v]}</td></tr>`
+  ).join('');
+  tbl.innerHTML=`<thead><tr><th>Línea</th><th>Goles</th><th>Resultado</th></tr></thead><tbody>`+
+    makeRows(d.over,'Más')+makeRows(d.under,'Menos')+'</tbody>';
+  box.style.display='block';
+}
 
 function calcEW_CO(){
   const total=parseFloat(document.getElementById('co-total').value);
@@ -945,15 +1102,15 @@ function calcEW_CO(){
   const oddsC = r2(((odds-1)/frac)+1);
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
-  const posLabel = frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
-  setCard('co-c-pos-title', posLabel);
-  setCard('co-c-each-g', fmtCOP(each)+' COP');
-  setCard('co-c-each-c', fmtCOP(each)+' COP');
-  setCard('co-c-odds-g', oddsG.toFixed(2));
-  setCard('co-c-odds-c', oddsC.toFixed(2));
-  setCard('co-c-pay-g',  fmtCOP(payG)+' COP');
-  setCard('co-c-pay-c',  fmtCOP(payC)+' COP');
-  setCard('co-c-total',  fmtCOP(total)+' COP');
+  const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
+  setCard('co-c-pos-title',posLabel);
+  setCard('co-c-each-g',fmtCOP(each)+' COP');
+  setCard('co-c-each-c',fmtCOP(each)+' COP');
+  setCard('co-c-odds-g',oddsG.toFixed(2));
+  setCard('co-c-odds-c',oddsC.toFixed(2));
+  setCard('co-c-pay-g', fmtCOP(payG)+' COP');
+  setCard('co-c-pay-c', fmtCOP(payC)+' COP');
+  setCard('co-c-total', fmtCOP(total)+' COP');
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'COP',fmtCOP,odds.toFixed(2),frac);
   cards.style.display='block';
 }
@@ -969,34 +1126,32 @@ function calcEW_MX(){
   if(isNaN(oddsDecG)||oddsDecG<=1){ cards.style.display='none'; narr.innerHTML=''; return; }
   const each   = total/2;
   const oddsDecC=r2(((oddsDecG-1)/frac)+1);
-  const oddsCam= oddsDecC>=2?Math.round((oddsDecC-1)*100):Math.round(-100/(oddsDecC-1));
+  const oddsCam=oddsDecC>=2?Math.round((oddsDecC-1)*100):Math.round(-100/(oddsDecC-1));
   const payG   = r2(each*oddsDecG);
   const payC   = r2(each*oddsDecC);
   const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
-  setCard('mx-c-pos-title', posLabel);
-  setCard('mx-c-each-g', fmtMXN(each)+' MXN');
-  setCard('mx-c-each-c', fmtMXN(each)+' MXN');
-  setCard('mx-c-odds-g', (oddsAm>0?'+':'')+oddsAm);
-  setCard('mx-c-odds-c', (oddsCam>0?'+':'')+oddsCam);
-  setCard('mx-c-pay-g',  fmtMXN(payG)+' MXN');
-  setCard('mx-c-pay-c',  fmtMXN(payC)+' MXN');
-  setCard('mx-c-total',  fmtMXN(total)+' MXN');
+  setCard('mx-c-pos-title',posLabel);
+  setCard('mx-c-each-g',fmtMXN(each)+' MXN');
+  setCard('mx-c-each-c',fmtMXN(each)+' MXN');
+  setCard('mx-c-odds-g',(oddsAm>0?'+':'')+oddsAm);
+  setCard('mx-c-odds-c',(oddsCam>0?'+':'')+oddsCam);
+  setCard('mx-c-pay-g', fmtMXN(payG)+' MXN');
+  setCard('mx-c-pay-c', fmtMXN(payC)+' MXN');
+  setCard('mx-c-total', fmtMXN(total)+' MXN');
   narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payG,frac);
   cards.style.display='block';
 }
 
-function buildNarrative(each, oddsG, oddsC, payG, payC, payTotal, cur, fmtFn, oddsLabel, frac){
-  const posLabel = frac===2 ? '2° posición' : '2° o 3° posición';
-  return `
-    <span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtFn(each*2)} ${cur}</strong> se divide en dos partes iguales:</span>
+function buildNarrative(each,oddsG,oddsC,payG,payC,payTotal,cur,fmtFn,oddsLabel,frac){
+  const posLabel=frac===2?'2° posición':'2° o 3° posición';
+  return `<span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtFn(each*2)} ${cur}</strong> se divide en dos partes iguales:</span>
     <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtFn(payG)} ${cur}</strong></span>
     <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtFn(payC)} ${cur}</strong></span>`;
 }
 
-function buildNarrativeMX(each, oddsAmG, oddsAmC, payG, payC, payTotal, frac){
-  const posLabel = frac===2 ? '2° posición' : '2° o 3° posición';
-  return `
-    <span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtMXN(each*2)} MXN</strong> se divide en dos partes iguales:</span>
+function buildNarrativeMX(each,oddsAmG,oddsAmC,payG,payC,payTotal,frac){
+  const posLabel=frac===2?'2° posición':'2° o 3° posición';
+  return `<span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtMXN(each*2)} MXN</strong> se divide en dos partes iguales:</span>
     <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtMXN(payG)} MXN</strong></span>
     <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtMXN(payC)} MXN</strong></span>`;
 }
@@ -1014,14 +1169,14 @@ function calcEW_PE(){
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
   const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
-  setCard('pe-c-pos-title', posLabel);
-  setCard('pe-c-each-g', fmtPEN(each)+' Soles');
-  setCard('pe-c-each-c', fmtPEN(each)+' Soles');
-  setCard('pe-c-odds-g', oddsG.toFixed(2));
-  setCard('pe-c-odds-c', oddsC.toFixed(2));
-  setCard('pe-c-pay-g',  fmtPEN(payG)+' Soles');
-  setCard('pe-c-pay-c',  fmtPEN(payC)+' Soles');
-  setCard('pe-c-total',  fmtPEN(total)+' Soles');
+  setCard('pe-c-pos-title',posLabel);
+  setCard('pe-c-each-g',fmtPEN(each)+' Soles');
+  setCard('pe-c-each-c',fmtPEN(each)+' Soles');
+  setCard('pe-c-odds-g',oddsG.toFixed(2));
+  setCard('pe-c-odds-c',oddsC.toFixed(2));
+  setCard('pe-c-pay-g', fmtPEN(payG)+' Soles');
+  setCard('pe-c-pay-c', fmtPEN(payC)+' Soles');
+  setCard('pe-c-total', fmtPEN(total)+' Soles');
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'Soles',fmtPEN,odds.toFixed(2),frac);
   cards.style.display='block';
 }
