@@ -10,11 +10,18 @@
     --bg:#0d0f14;--surface:#161922;--surface2:#1e2330;--border:#2a3045;
     --accent:#00c896;--accent2:#0097ff;--accent3:#b06cff;--text:#e8ecf4;--muted:#6b7591;
     --win:#00c896;--lose:#ff4f6a;--half:#ffb547;--push:#0097ff;
+    --card-num:#ffffff;--card-sub:#c8d0e0;--card-bg-win:rgba(0,200,150,0.07);--card-bg-blue:rgba(0,151,255,0.07);
+    --card-border-win:rgba(0,200,150,0.3);--card-border-blue:rgba(0,151,255,0.3);
+    --step-bg:var(--surface);--step-border:var(--border);
   }
   body.light {
     --bg:#f4f6fb;--surface:#ffffff;--surface2:#eef0f8;--border:#dde2f0;
     --text:#2d3452;--muted:#8892b0;
     --win:#0a8f6a;--lose:#c93a55;--half:#c47d00;--push:#1272c4;
+    --card-num:#2d3452;--card-sub:#8892b0;
+    --card-bg-win:rgba(10,143,106,0.07);--card-bg-blue:rgba(18,114,196,0.07);
+    --card-border-win:rgba(10,143,106,0.3);--card-border-blue:rgba(18,114,196,0.3);
+    --step-bg:#eef0f8;--step-border:#dde2f0;
   }
   body.light header{background:#ffffff;border-bottom:1px solid #dde2f0}
   body.light .tabs{background:#ffffff;border-bottom:2px solid #dde2f0}
@@ -104,14 +111,14 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .result-header{padding:16px 22px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;display:flex;align-items:center;gap:10px}
   .result-header .badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:.85rem;font-weight:700;letter-spacing:1px}
-  .result-body{padding:18px 22px 22px;background:var(--surface2);color:#c8d0e0}
+  .result-body{padding:18px 22px 22px;background:var(--surface2);color:var(--card-sub)}
   .result-verdict{font-size:1.8rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:14px}
   .res-win{border-color:var(--win);background:rgba(0,200,150,.07)}.res-win .result-header{background:rgba(0,200,150,.15);color:var(--win)}.res-win .result-verdict{color:var(--win)}.res-win .badge{background:rgba(0,200,150,.25);color:var(--win)}
   .res-lose{border-color:var(--lose);background:rgba(255,79,106,.07)}.res-lose .result-header{background:rgba(255,79,106,.15);color:var(--lose)}.res-lose .result-verdict{color:var(--lose)}.res-lose .badge{background:rgba(255,79,106,.25);color:var(--lose)}
   .res-half-win{border-color:var(--half);background:rgba(255,181,71,.07)}.res-half-win .result-header{background:rgba(255,181,71,.15);color:var(--half)}.res-half-win .result-verdict{color:var(--half)}.res-half-win .badge{background:rgba(255,181,71,.25);color:var(--half)}
   .res-half-lose{border-color:var(--half);background:rgba(255,181,71,.07)}.res-half-lose .result-header{background:rgba(255,181,71,.15);color:var(--half)}.res-half-lose .result-verdict{color:var(--half)}.res-half-lose .badge{background:rgba(255,181,71,.25);color:var(--half)}
   .res-push{border-color:var(--push);background:rgba(0,151,255,.07)}.res-push .result-header{background:rgba(0,151,255,.15);color:var(--push)}.res-push .result-verdict{color:var(--push)}.res-push .badge{background:rgba(0,151,255,.25);color:var(--push)}
-  .note-box{background:rgba(255,181,71,.08);border:1px solid rgba(255,181,71,.3);border-radius:10px;padding:14px 16px;font-size:.84rem;line-height:1.7;color:#c8d0e0;margin-top:14px}
+  .note-box{background:rgba(255,181,71,.08);border:1px solid rgba(255,181,71,.3);border-radius:10px;padding:14px 16px;font-size:.84rem;line-height:1.7;color:var(--card-sub);margin-top:14px}
   .note-box strong{color:#ffffff;display:block;margin-bottom:6px;font-size:.78rem;letter-spacing:.6px;text-transform:uppercase}
   .note-box ul{padding-left:18px;margin-top:6px}
   .note-box ul li{margin-bottom:4px}
@@ -657,7 +664,7 @@
     .ew-table input.readonly{background:var(--bg);color:#ffb747;font-weight:700;cursor:default;border-color:transparent;width:100%;display:block;box-sizing:border-box;height:42px}
     .ew-table .select-wrap select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 12px;width:100%;outline:none;appearance:none;-webkit-appearance:none}
     .ew-table .select-wrap select:focus{border-color:#ffb747}
-    .ew-narrative{margin-top:20px;background:rgba(255,183,71,0.04);border:1px solid rgba(255,183,71,0.25);border-radius:12px;padding:20px 22px;font-size:.88rem;line-height:1.85;color:#c8d0e0;display:none}
+    .ew-narrative{margin-top:20px;background:rgba(255,183,71,0.04);border:1px solid rgba(255,183,71,0.25);border-radius:12px;padding:20px 22px;font-size:.88rem;line-height:1.85;color:var(--card-sub);display:none}
     .ew-narrative.visible{display:block}
     .ew-narrative strong{color:#ffffff}
     .ew-narrative .ew-rocket{margin-bottom:12px;display:block}
@@ -688,30 +695,30 @@
       </div>
       <div id="co-cards" style="display:none">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
-          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
             <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="co-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="co-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
-              <div id="co-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="co-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
               <div id="co-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
             </div>
           </div>
-          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="co-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="co-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="co-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
-              <div id="co-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="co-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
@@ -719,7 +726,7 @@
             </div>
           </div>
         </div>
-        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="co-c-total" style="color:#ffb747">—</strong>
         </div>
         <div id="co-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
@@ -752,30 +759,30 @@
       </div>
       <div id="mx-cards" style="display:none">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
-          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
             <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="mx-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="mx-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio</div>
-              <div id="mx-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="mx-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
               <div id="mx-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
             </div>
           </div>
-          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="mx-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="mx-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="mx-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio colocado</div>
-              <div id="mx-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="mx-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
@@ -783,7 +790,7 @@
             </div>
           </div>
         </div>
-        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="mx-c-total" style="color:#ffb747">—</strong>
         </div>
         <div id="mx-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
@@ -816,30 +823,30 @@
       </div>
       <div id="pe-cards" style="display:none">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
-          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
             <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="pe-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="pe-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
-              <div id="pe-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="pe-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
               <div id="pe-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
             </div>
           </div>
-          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+          <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="pe-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="pe-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="pe-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="margin-bottom:8px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
-              <div id="pe-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+              <div id="pe-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
             </div>
             <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
               <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
@@ -847,7 +854,7 @@
             </div>
           </div>
         </div>
-        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="pe-c-total" style="color:#ffb747">—</strong>
         </div>
         <div id="pe-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
@@ -1001,12 +1008,12 @@ function calc3Way(){
       <!-- Paso a paso -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:12px">
         <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:#b06cff;font-weight:700;margin-bottom:10px">⚙️ Cómo se aplicó el hándicap</div>
-        <div style="font-size:.88rem;color:#c8d0e0;line-height:2">
-          Marcador real: <strong style="color:#ffffff">${home} – ${away}</strong>
+        <div style="font-size:.88rem;color:var(--card-sub);line-height:2">
+          Marcador real: <strong style="color:var(--card-num)">${home} – ${away}</strong>
           &nbsp;${stepArrow}&nbsp;
           ${favLabel} recibe ${plusSign}
           &nbsp;${stepArrow}&nbsp;
-          Marcador ajustado: <strong style="color:#ffffff">${adjHome} – ${adjAway}</strong>
+          Marcador ajustado: <strong style="color:var(--card-num)">${adjHome} – ${adjAway}</strong>
         </div>
       </div>
 
@@ -1015,7 +1022,7 @@ function calc3Way(){
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
           <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Resultado ajustado</div>
           <div style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:#ffffff">${adjHome} – ${adjAway}</div>
-          <div style="font-size:.82rem;color:#c8d0e0;margin-top:4px">Gana: <strong style="color:#ffffff">${labels[adjResult]}</strong></div>
+          <div style="font-size:.82rem;color:var(--card-sub);margin-top:4px">Gana: <strong style="color:var(--card-num)">${labels[adjResult]}</strong></div>
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
           <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Tu apuesta</div>
