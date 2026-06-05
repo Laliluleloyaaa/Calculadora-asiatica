@@ -545,9 +545,9 @@
     .ew-table .ew-val{color:var(--text);font-weight:700;text-align:right}
     .ew-table .ew-computed{background:rgba(255,183,71,0.06)}
     .ew-table .ew-section{background:#1c2e50;color:#c8d8f0;font-weight:700;font-size:.75rem;letter-spacing:1px;text-transform:uppercase;text-align:center}
-    .ew-table input[type=number]{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 12px;width:100%;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none}
+    .ew-table input[type=number],.ew-table input[type=text]{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 12px;width:100%;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;box-sizing:border-box;height:42px}
     .ew-table input[type=number]:focus{border-color:#ffb747}
-    .ew-table input.readonly{background:var(--bg);color:#ffb747;font-weight:700;cursor:default;border-color:transparent}
+    .ew-table input.readonly{background:var(--bg);color:#ffb747;font-weight:700;cursor:default;border-color:transparent;width:100%;display:block;box-sizing:border-box;height:42px}
     .ew-table .select-wrap select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 12px;width:100%;outline:none;appearance:none;-webkit-appearance:none}
     .ew-table .select-wrap select:focus{border-color:#ffb747}
     .ew-narrative{margin-top:20px;background:rgba(255,183,71,0.06);border:1px solid rgba(255,183,71,0.25);border-radius:12px;padding:20px 22px;font-size:.88rem;line-height:1.85;color:var(--muted);display:none}
@@ -584,7 +584,7 @@
         <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
         <tr class="ew-computed">
           <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-each" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="co-each" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Cuota Ganador (G)</td>
@@ -639,7 +639,7 @@
         <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
         <tr class="ew-computed">
           <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-each" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="mx-each" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Cuota Ganador — Momio (MX)</td>
@@ -694,7 +694,7 @@
         <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
         <tr class="ew-computed">
           <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-each" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="pe-each" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Cuota Ganador (G)</td>
@@ -918,12 +918,12 @@ function calcEW_CO(){
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
   const payT  = payG; // Pago total = Pago Ganador (cuota total × cada apuesta)
-  setVal('co-each',     r2(each));
+  setFmt('co-each',     each,  fmtCOP);
   setVal('co-odds-g',   r2(oddsG));
   setVal('co-odds-c',   r2(oddsC));
-  setFmt('co-pay-g',    payG, fmtCOP);
-  setFmt('co-pay-c',    payC, fmtCOP);
-  setFmt('co-pay-total',payT, fmtCOP);
+  setFmt('co-pay-g',    payG,  fmtCOP);
+  setFmt('co-pay-c',    payC,  fmtCOP);
+  setFmt('co-pay-total',payT,  fmtCOP);
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'COP',fmtCOP,odds.toFixed(2));
   narr.classList.add('visible');
 }
@@ -953,12 +953,12 @@ function calcEW_MX(){
   const payG  = r2(each*oddsDecG);
   const payC  = r2(each*oddsDecC);
   const payT  = payG;
-  setVal('mx-each',     r2(each));
+  setFmt('mx-each',     each,   fmtMXN);
   setVal('mx-odds-g',   oddsAm);
   setVal('mx-odds-c',   oddsCam);
-  setFmt('mx-pay-g',    payG, fmtMXN);
-  setFmt('mx-pay-c',    payC, fmtMXN);
-  setFmt('mx-pay-total',payT, fmtMXN);
+  setFmt('mx-pay-g',    payG,   fmtMXN);
+  setFmt('mx-pay-c',    payC,   fmtMXN);
+  setFmt('mx-pay-total',payT,   fmtMXN);
   narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payT);
   narr.classList.add('visible');
 }
@@ -986,12 +986,12 @@ function calcEW_PE(){
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
   const payT  = payG; // Pago total = Pago Ganador
-  setVal('pe-each',     r2(each));
+  setFmt('pe-each',     each,  fmtPEN);
   setVal('pe-odds-g',   r2(oddsG));
   setVal('pe-odds-c',   r2(oddsC));
-  setFmt('pe-pay-g',    payG, fmtPEN);
-  setFmt('pe-pay-c',    payC, fmtPEN);
-  setFmt('pe-pay-total',payT, fmtPEN);
+  setFmt('pe-pay-g',    payG,  fmtPEN);
+  setFmt('pe-pay-c',    payC,  fmtPEN);
+  setFmt('pe-pay-total',payT,  fmtPEN);
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'Soles',fmtPEN,odds.toFixed(2));
   narr.classList.add('visible');
 }
