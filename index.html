@@ -47,15 +47,15 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .result-header{padding:16px 22px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;display:flex;align-items:center;gap:10px}
   .result-header .badge{display:inline-block;padding:3px 12px;border-radius:20px;font-size:.85rem;font-weight:700;letter-spacing:1px}
-  .result-body{padding:18px 22px 22px;background:var(--surface2)}
+  .result-body{padding:18px 22px 22px;background:var(--surface2);color:#c8d0e0}
   .result-verdict{font-size:1.8rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:14px}
   .res-win{border-color:var(--win);background:rgba(0,200,150,.07)}.res-win .result-header{background:rgba(0,200,150,.15);color:var(--win)}.res-win .result-verdict{color:var(--win)}.res-win .badge{background:rgba(0,200,150,.25);color:var(--win)}
   .res-lose{border-color:var(--lose);background:rgba(255,79,106,.07)}.res-lose .result-header{background:rgba(255,79,106,.15);color:var(--lose)}.res-lose .result-verdict{color:var(--lose)}.res-lose .badge{background:rgba(255,79,106,.25);color:var(--lose)}
   .res-half-win{border-color:var(--half);background:rgba(255,181,71,.07)}.res-half-win .result-header{background:rgba(255,181,71,.15);color:var(--half)}.res-half-win .result-verdict{color:var(--half)}.res-half-win .badge{background:rgba(255,181,71,.25);color:var(--half)}
   .res-half-lose{border-color:var(--half);background:rgba(255,181,71,.07)}.res-half-lose .result-header{background:rgba(255,181,71,.15);color:var(--half)}.res-half-lose .result-verdict{color:var(--half)}.res-half-lose .badge{background:rgba(255,181,71,.25);color:var(--half)}
   .res-push{border-color:var(--push);background:rgba(0,151,255,.07)}.res-push .result-header{background:rgba(0,151,255,.15);color:var(--push)}.res-push .result-verdict{color:var(--push)}.res-push .badge{background:rgba(0,151,255,.25);color:var(--push)}
-  .note-box{background:rgba(255,181,71,.08);border:1px solid rgba(255,181,71,.3);border-radius:10px;padding:14px 16px;font-size:.84rem;line-height:1.7;color:#e0c97a;margin-top:14px}
-  .note-box strong{color:var(--half);display:block;margin-bottom:6px;font-size:.78rem;letter-spacing:.6px;text-transform:uppercase}
+  .note-box{background:rgba(255,181,71,.08);border:1px solid rgba(255,181,71,.3);border-radius:10px;padding:14px 16px;font-size:.84rem;line-height:1.7;color:#c8d0e0;margin-top:14px}
+  .note-box strong{color:#ffffff;display:block;margin-bottom:6px;font-size:.78rem;letter-spacing:.6px;text-transform:uppercase}
   .note-box ul{padding-left:18px;margin-top:6px}
   .note-box ul li{margin-bottom:4px}
   .section-label{font-size:.72rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
@@ -550,9 +550,9 @@
     .ew-table input.readonly{background:var(--bg);color:#ffb747;font-weight:700;cursor:default;border-color:transparent;width:100%;display:block;box-sizing:border-box;height:42px}
     .ew-table .select-wrap select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 12px;width:100%;outline:none;appearance:none;-webkit-appearance:none}
     .ew-table .select-wrap select:focus{border-color:#ffb747}
-    .ew-narrative{margin-top:20px;background:rgba(255,183,71,0.06);border:1px solid rgba(255,183,71,0.25);border-radius:12px;padding:20px 22px;font-size:.88rem;line-height:1.85;color:var(--muted);display:none}
+    .ew-narrative{margin-top:20px;background:rgba(255,183,71,0.04);border:1px solid rgba(255,183,71,0.25);border-radius:12px;padding:20px 22px;font-size:.88rem;line-height:1.85;color:#c8d0e0;display:none}
     .ew-narrative.visible{display:block}
-    .ew-narrative strong{color:var(--text)}
+    .ew-narrative strong{color:#ffffff}
     .ew-narrative .ew-rocket{margin-bottom:12px;display:block}
   </style>
 
@@ -852,14 +852,22 @@ function calc3Way(){
   const cls=win?'res-win':'res-lose';
   const badge=win?'✅ Apuesta ganada':'❌ Apuesta perdida';
   const verdict=win?'GANAS':'PIERDES';
+  const resultColor=win?'var(--win)':'var(--lose)';
   box.innerHTML=`
     <div class="result-header">RESULTADO &nbsp;<span class="badge">${badge}</span></div>
     <div class="result-body">
       <div class="result-verdict">${verdict}</div>
-      <div style="font-size:.85rem;color:var(--muted);line-height:1.8">
-        Marcador ajustado: <strong style="color:var(--text)">${adjHome} – ${adjAway}</strong>
-        &nbsp;→&nbsp; Resultado: <strong style="color:var(--text)">${labels[adjResult]}</strong><br>
-        Tu apuesta: <strong style="color:var(--text)">${labels[bet]}</strong>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Marcador ajustado</div>
+          <div style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:#ffffff">${adjHome} – ${adjAway}</div>
+          <div style="font-size:.8rem;color:#c8d0e0;margin-top:4px">Resultado: <strong style="color:#ffffff">${labels[adjResult]}</strong></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px">
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;font-weight:700">Tu apuesta</div>
+          <div style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:#ffffff">${labels[bet]}</div>
+          <div style="font-size:.8rem;margin-top:4px;font-weight:700;color:${resultColor}">${win?'✅ Coincide':'❌ No coincide'}</div>
+        </div>
       </div>
     </div>`;
   box.className='result-box '+cls;
