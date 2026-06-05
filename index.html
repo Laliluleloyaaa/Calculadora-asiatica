@@ -596,15 +596,15 @@
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-g" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="co-pay-g" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-c" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="co-pay-c" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
           <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-total" type="number" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
+          <td class="ew-input-cell"><input class="readonly" id="co-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
         </tr>
       </table>
       <div id="co-narrative" class="ew-narrative"></div>
@@ -651,15 +651,15 @@
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-g" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="mx-pay-g" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-c" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="mx-pay-c" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
           <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-total" type="number" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
+          <td class="ew-input-cell"><input class="readonly" id="mx-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
         </tr>
       </table>
       <div id="mx-narrative" class="ew-narrative"></div>
@@ -706,15 +706,15 @@
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-g" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="pe-pay-g" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed">
           <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-c" type="number" readonly placeholder="—"></td>
+          <td class="ew-input-cell"><input class="readonly" id="pe-pay-c" type="text" readonly placeholder="—"></td>
         </tr>
         <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
           <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-total" type="number" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
+          <td class="ew-input-cell"><input class="readonly" id="pe-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
         </tr>
       </table>
       <div id="pe-narrative" class="ew-narrative"></div>
@@ -874,7 +874,7 @@ function switchEW(country,btn){
 }
 
 function r2(n){return Math.round(n*100)/100;}
-function fmtCOP(n){return n.toLocaleString('es-CO',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtCOP(n){return n.toLocaleString('es-CO',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function fmtMXN(n){return n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function fmtPEN(n){return n.toLocaleString('es-PE',{minimumFractionDigits:0,maximumFractionDigits:0});}
 
@@ -887,7 +887,12 @@ function mxAmeToDecimal(am){
 
 function setVal(id,val){
   const el=document.getElementById(id);
-  if(el) el.value=(val===''||val===null||isNaN(val))?'':val;
+  if(el) el.value=(val===''||val===null||(typeof val==='number'&&isNaN(val)))?'':val;
+}
+function setFmt(id,val,fmtFn){
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.value=(val===''||val===null||(typeof val==='number'&&isNaN(val)))?'':fmtFn(val);
 }
 
 function buildNarrative(each, oddsG, oddsC, payG, payC, payTotal, cur, fmtFn, oddsLabel){
@@ -916,9 +921,9 @@ function calcEW_CO(){
   setVal('co-each',     r2(each));
   setVal('co-odds-g',   r2(oddsG));
   setVal('co-odds-c',   r2(oddsC));
-  setVal('co-pay-g',    r2(payG));
-  setVal('co-pay-c',    r2(payC));
-  setVal('co-pay-total',r2(payT));
+  setFmt('co-pay-g',    payG, fmtCOP);
+  setFmt('co-pay-c',    payC, fmtCOP);
+  setFmt('co-pay-total',payT, fmtCOP);
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'COP',fmtCOP,odds.toFixed(2));
   narr.classList.add('visible');
 }
@@ -949,11 +954,11 @@ function calcEW_MX(){
   const payC  = r2(each*oddsDecC);
   const payT  = payG;
   setVal('mx-each',     r2(each));
-  setVal('mx-odds-g',   oddsAm);          // mostrar momio original
-  setVal('mx-odds-c',   oddsCam);         // mostrar momio colocado
-  setVal('mx-pay-g',    r2(payG));
-  setVal('mx-pay-c',    r2(payC));
-  setVal('mx-pay-total',r2(payT));
+  setVal('mx-odds-g',   oddsAm);
+  setVal('mx-odds-c',   oddsCam);
+  setFmt('mx-pay-g',    payG, fmtMXN);
+  setFmt('mx-pay-c',    payC, fmtMXN);
+  setFmt('mx-pay-total',payT, fmtMXN);
   narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payT);
   narr.classList.add('visible');
 }
@@ -984,9 +989,9 @@ function calcEW_PE(){
   setVal('pe-each',     r2(each));
   setVal('pe-odds-g',   r2(oddsG));
   setVal('pe-odds-c',   r2(oddsC));
-  setVal('pe-pay-g',    r2(payG));
-  setVal('pe-pay-c',    r2(payC));
-  setVal('pe-pay-total',r2(payT));
+  setFmt('pe-pay-g',    payG, fmtPEN);
+  setFmt('pe-pay-c',    payC, fmtPEN);
+  setFmt('pe-pay-total',payT, fmtPEN);
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'Soles',fmtPEN,odds.toFixed(2));
   narr.classList.add('visible');
 }
