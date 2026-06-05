@@ -559,165 +559,192 @@
   <!-- CO -->
   <div id="ew-CO" class="ew-country-panel">
     <div class="calc-card" style="border-color:rgba(255,183,72,0.3)">
-      <h2><span class="dot" style="background:#ffb747"></span>CALCULADORA EACH-WAY — Colombia (COP)</h2>
-      <table class="ew-table">
-        <tr><td class="ew-section" colspan="2">DATOS DE ENTRADA</td></tr>
-        <tr>
-          <td class="ew-label">Valor total de la apuesta</td>
-          <td class="ew-input-cell"><input type="number" id="co-total" placeholder="Ej: 40000" min="1" oninput="calcEW_CO()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Cuota total</td>
-          <td class="ew-input-cell"><input type="number" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Fracción</td>
-          <td class="ew-input-cell">
-            <div class="select-wrap">
-              <select id="co-frac" onchange="calcEW_CO()">
-                <option value="2">1/2</option>
-                <option value="3">1/3</option>
-              </select>
+      <h2><span class="dot" style="background:#ffb747"></span>EACH WAY — Colombia (COP)</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Valor total de la apuesta</label>
+          <input type="number" id="co-total" placeholder="Ej: 40000" min="1" oninput="calcEW_CO()">
+        </div>
+        <div class="form-group">
+          <label>Cuota total</label>
+          <input type="number" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Fracción</label>
+        <div class="select-wrap">
+          <select id="co-frac" onchange="calcEW_CO()">
+            <option value="2">1/2</option>
+            <option value="3">1/3</option>
+          </select>
+        </div>
+      </div>
+      <div id="co-cards" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="co-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
             </div>
-          </td>
-        </tr>
-        <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-each" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-odds-g" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-odds-c" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-g" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-c" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
-          <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="co-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
-        </tr>
-      </table>
-      <div id="co-narrative" class="ew-narrative"></div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
+              <div id="co-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="co-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+            <div id="co-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="co-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
+              <div id="co-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="co-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+          Total apostado real: <strong id="co-c-total" style="color:#ffb747">—</strong>
+        </div>
+        <div id="co-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
+      </div>
     </div>
   </div>
 
   <!-- MX -->
   <div id="ew-MX" class="ew-country-panel" style="display:none">
     <div class="calc-card" style="border-color:rgba(255,183,72,0.3)">
-      <h2><span class="dot" style="background:#ffb747"></span>CALCULADORA EACH-WAY — México (MXN)</h2>
-      <table class="ew-table">
-        <tr><td class="ew-section" colspan="2">DATOS DE ENTRADA</td></tr>
-        <tr>
-          <td class="ew-label">Valor total de la apuesta</td>
-          <td class="ew-input-cell"><input type="number" id="mx-total" placeholder="Ej: 400" min="1" oninput="calcEW_MX()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Momio (MX)</td>
-          <td class="ew-input-cell"><input type="number" id="mx-odds-am" placeholder="Ej: 1800 o -150" oninput="calcEW_MX()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Fracción</td>
-          <td class="ew-input-cell">
-            <div class="select-wrap">
-              <select id="mx-frac" onchange="calcEW_MX()">
-                <option value="2">1/2</option>
-                <option value="3">1/3</option>
-              </select>
+      <h2><span class="dot" style="background:#ffb747"></span>EACH WAY — México (MXN)</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Valor total de la apuesta</label>
+          <input type="number" id="mx-total" placeholder="Ej: 400" min="1" oninput="calcEW_MX()">
+        </div>
+        <div class="form-group">
+          <label>Momio (MX)</label>
+          <input type="number" id="mx-odds-am" placeholder="Ej: 1800 o -150" oninput="calcEW_MX()">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Fracción</label>
+        <div class="select-wrap">
+          <select id="mx-frac" onchange="calcEW_MX()">
+            <option value="2">1/2</option>
+            <option value="3">1/3</option>
+          </select>
+        </div>
+      </div>
+      <div id="mx-cards" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="mx-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
             </div>
-          </td>
-        </tr>
-        <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-each" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Ganador — Momio (MX)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-odds-g" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Colocado — Momio (MX)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-odds-c" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-g" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-c" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
-          <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="mx-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
-        </tr>
-      </table>
-      <div id="mx-narrative" class="ew-narrative"></div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio</div>
+              <div id="mx-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="mx-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+            <div id="mx-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="mx-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio colocado</div>
+              <div id="mx-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="mx-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+          Total apostado real: <strong id="mx-c-total" style="color:#ffb747">—</strong>
+        </div>
+        <div id="mx-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
+      </div>
     </div>
   </div>
 
   <!-- PE -->
   <div id="ew-PE" class="ew-country-panel" style="display:none">
     <div class="calc-card" style="border-color:rgba(255,183,72,0.3)">
-      <h2><span class="dot" style="background:#ffb747"></span>CALCULADORA EACH-WAY — Perú (Soles)</h2>
-      <table class="ew-table">
-        <tr><td class="ew-section" colspan="2">DATOS DE ENTRADA</td></tr>
-        <tr>
-          <td class="ew-label">Valor total de la apuesta</td>
-          <td class="ew-input-cell"><input type="number" id="pe-total" placeholder="Ej: 80" min="1" oninput="calcEW_PE()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Cuota total</td>
-          <td class="ew-input-cell"><input type="number" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()"></td>
-        </tr>
-        <tr>
-          <td class="ew-label">Fracción</td>
-          <td class="ew-input-cell">
-            <div class="select-wrap">
-              <select id="pe-frac" onchange="calcEW_PE()">
-                <option value="2">1/2</option>
-                <option value="3">1/3</option>
-              </select>
+      <h2><span class="dot" style="background:#ffb747"></span>EACH WAY — Perú (Soles)</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Valor total de la apuesta</label>
+          <input type="number" id="pe-total" placeholder="Ej: 80" min="1" oninput="calcEW_PE()">
+        </div>
+        <div class="form-group">
+          <label>Cuota total</label>
+          <input type="number" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Fracción</label>
+        <div class="select-wrap">
+          <select id="pe-frac" onchange="calcEW_PE()">
+            <option value="2">1/2</option>
+            <option value="3">1/3</option>
+          </select>
+        </div>
+      </div>
+      <div id="pe-cards" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+          <div style="background:rgba(0,200,150,0.07);border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:18px 20px">
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="pe-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
             </div>
-          </td>
-        </tr>
-        <tr><td class="ew-section" colspan="2">RESULTADOS CALCULADOS</td></tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Valor de cada apuesta</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-each" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-odds-g" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Cuota Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-odds-c" type="number" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Ganador (G)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-g" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed">
-          <td class="ew-label">Pago Potencial Colocado (C)</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-c" type="text" readonly placeholder="—"></td>
-        </tr>
-        <tr class="ew-computed" style="border-top:2px solid rgba(255,183,71,0.4)">
-          <td class="ew-label" style="color:#ffb747;font-weight:700">Pago Potencial Total</td>
-          <td class="ew-input-cell"><input class="readonly" id="pe-pay-total" type="text" readonly placeholder="—" style="color:#ffb747;font-size:1rem"></td>
-        </tr>
-      </table>
-      <div id="pe-narrative" class="ew-narrative"></div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
+              <div id="pe-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="pe-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,151,255,0.07);border:1px solid rgba(0,151,255,0.3);border-radius:12px;padding:18px 20px">
+            <div id="pe-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
+              <div id="pe-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
+              <div id="pe-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#ffffff;letter-spacing:1px">—</div>
+            </div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
+              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
+              <div id="pe-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:#c8d0e0;text-align:center">
+          Total apostado real: <strong id="pe-c-total" style="color:#ffb747">—</strong>
+        </div>
+        <div id="pe-narrative" class="ew-narrative visible" style="margin-top:14px"></div>
+      </div>
     </div>
   </div>
 
@@ -903,37 +930,32 @@ function setFmt(id,val,fmtFn){
   el.value=(val===''||val===null||(typeof val==='number'&&isNaN(val)))?'':fmtFn(val);
 }
 
-function buildNarrative(each, oddsG, oddsC, payG, payC, payTotal, cur, fmtFn, oddsLabel){
-  return `
-    <span class="ew-rocket">Tu apuesta ha sido realizada bajo el formato Each Way. Este tipo de apuesta se divide en dos partes de igual valor <strong>${fmtFn(each)} ${cur}</strong>.</span>
-    <span class="ew-rocket">🚀 <strong>Apuesta al mercado Ganador:</strong> Has apostado al mercado Ganador con una cuota de <strong>${oddsLabel}</strong>, es decir, que tu equipo gane el torneo. En caso de acertar, obtendrías un pago potencial de <strong>${fmtFn(payG)} ${cur}</strong>. 🏆</span>
-    <span class="ew-rocket">🚀 <strong>Apuesta al mercado Colocado:</strong> La segunda parte de tu apuesta se ha realizado al mercado Colocado, con una cuota equivalente a una parte de la cuota original, lo que daría una cuota de <strong>${r2(oddsC).toFixed(2)}</strong>. En este caso, estás apostando a que tu equipo finalice entre las primeras posiciones del torneo. Si aciertas, recibirías un pago potencial de <strong>${fmtFn(payC)} ${cur}</strong>. 🥈</span>
-    <span>👉 <strong>En resumen,</strong> el pago potencial de tu apuesta es de <strong>${fmtFn(payTotal)} ${cur}</strong>, correspondiente al mercado Ganador con la cuota total aplicada sobre tu parte de inversión.</span>`;
-}
+
+function setCard(id,val){ const el=document.getElementById(id); if(el) el.textContent=val; }
 
 function calcEW_CO(){
   const total=parseFloat(document.getElementById('co-total').value);
   const odds =parseFloat(document.getElementById('co-odds').value);
   const frac =parseFloat(document.getElementById('co-frac').value);
   const narr =document.getElementById('co-narrative');
-  if(isNaN(total)||isNaN(odds)||odds<=1){
-    ['co-each','co-odds-g','co-odds-c','co-pay-g','co-pay-c','co-pay-total'].forEach(id=>setVal(id,''));
-    narr.classList.remove('visible'); narr.innerHTML=''; return;
-  }
+  const cards=document.getElementById('co-cards');
+  if(isNaN(total)||isNaN(odds)||odds<=1){ cards.style.display='none'; narr.innerHTML=''; return; }
   const each  = total/2;
   const oddsG = odds;
   const oddsC = r2(((odds-1)/frac)+1);
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
-  const payT  = payG; // Pago total = Pago Ganador (cuota total × cada apuesta)
-  setFmt('co-each',     each,  fmtCOP);
-  setVal('co-odds-g',   r2(oddsG));
-  setVal('co-odds-c',   r2(oddsC));
-  setFmt('co-pay-g',    payG,  fmtCOP);
-  setFmt('co-pay-c',    payC,  fmtCOP);
-  setFmt('co-pay-total',payT,  fmtCOP);
-  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'COP',fmtCOP,odds.toFixed(2));
-  narr.classList.add('visible');
+  const posLabel = frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
+  setCard('co-c-pos-title', posLabel);
+  setCard('co-c-each-g', fmtCOP(each)+' COP');
+  setCard('co-c-each-c', fmtCOP(each)+' COP');
+  setCard('co-c-odds-g', oddsG.toFixed(2));
+  setCard('co-c-odds-c', oddsC.toFixed(2));
+  setCard('co-c-pay-g',  fmtCOP(payG)+' COP');
+  setCard('co-c-pay-c',  fmtCOP(payC)+' COP');
+  setCard('co-c-total',  fmtCOP(total)+' COP');
+  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'COP',fmtCOP,odds.toFixed(2),frac);
+  cards.style.display='block';
 }
 
 function calcEW_MX(){
@@ -941,42 +963,42 @@ function calcEW_MX(){
   const oddsAm=parseFloat(document.getElementById('mx-odds-am').value);
   const frac  =parseFloat(document.getElementById('mx-frac').value);
   const narr  =document.getElementById('mx-narrative');
-  if(isNaN(total)||isNaN(oddsAm)){
-    ['mx-each','mx-odds-g','mx-odds-c','mx-pay-g','mx-pay-c','mx-pay-total'].forEach(id=>setVal(id,''));
-    narr.classList.remove('visible'); narr.innerHTML=''; return;
-  }
-  // Convertir momio a decimal para cálculos internos
-  const oddsDecG = mxAmeToDecimal(oddsAm);
-  if(isNaN(oddsDecG)||oddsDecG<=1){
-    ['mx-each','mx-odds-g','mx-odds-c','mx-pay-g','mx-pay-c','mx-pay-total'].forEach(id=>setVal(id,''));
-    narr.classList.remove('visible'); narr.innerHTML=''; return;
-  }
-  const each     = total/2;
-  // Cuota colocado en decimal
-  const oddsDecC = r2(((oddsDecG-1)/frac)+1);
-  // Convertir cuota colocado decimal → momio americano para mostrar
-  const oddsCam  = oddsDecC>=2 ? Math.round((oddsDecC-1)*100) : Math.round(-100/(oddsDecC-1));
-  // Pagos: stake × (cuota decimal - 1) ya que el momio representa la ganancia sobre la apuesta
-  // Para momio positivo: ganancia = stake × (momio/100); retorno = stake + ganancia = stake × (momio/100 + 1) = stake × oddsDecimal
-  const payG  = r2(each*oddsDecG);
-  const payC  = r2(each*oddsDecC);
-  const payT  = payG;
-  setFmt('mx-each',     each,   fmtMXN);
-  setVal('mx-odds-g',   oddsAm);
-  setVal('mx-odds-c',   oddsCam);
-  setFmt('mx-pay-g',    payG,   fmtMXN);
-  setFmt('mx-pay-c',    payC,   fmtMXN);
-  setFmt('mx-pay-total',payT,   fmtMXN);
-  narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payT);
-  narr.classList.add('visible');
+  const cards =document.getElementById('mx-cards');
+  if(isNaN(total)||isNaN(oddsAm)){ cards.style.display='none'; narr.innerHTML=''; return; }
+  const oddsDecG=mxAmeToDecimal(oddsAm);
+  if(isNaN(oddsDecG)||oddsDecG<=1){ cards.style.display='none'; narr.innerHTML=''; return; }
+  const each   = total/2;
+  const oddsDecC=r2(((oddsDecG-1)/frac)+1);
+  const oddsCam= oddsDecC>=2?Math.round((oddsDecC-1)*100):Math.round(-100/(oddsDecC-1));
+  const payG   = r2(each*oddsDecG);
+  const payC   = r2(each*oddsDecC);
+  const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
+  setCard('mx-c-pos-title', posLabel);
+  setCard('mx-c-each-g', fmtMXN(each)+' MXN');
+  setCard('mx-c-each-c', fmtMXN(each)+' MXN');
+  setCard('mx-c-odds-g', (oddsAm>0?'+':'')+oddsAm);
+  setCard('mx-c-odds-c', (oddsCam>0?'+':'')+oddsCam);
+  setCard('mx-c-pay-g',  fmtMXN(payG)+' MXN');
+  setCard('mx-c-pay-c',  fmtMXN(payC)+' MXN');
+  setCard('mx-c-total',  fmtMXN(total)+' MXN');
+  narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payG,frac);
+  cards.style.display='block';
 }
 
-function buildNarrativeMX(each, oddsAmG, oddsAmC, payG, payC, payTotal){
+function buildNarrative(each, oddsG, oddsC, payG, payC, payTotal, cur, fmtFn, oddsLabel, frac){
+  const posLabel = frac===2 ? '2° posición' : '2° o 3° posición';
   return `
-    <span class="ew-rocket">Tu apuesta ha sido realizada bajo el formato Each Way. Este tipo de apuesta se divide en dos partes de igual valor <strong>${fmtMXN(each)} MXN</strong>.</span>
-    <span class="ew-rocket">🚀 <strong>Apuesta al mercado Ganador:</strong> Has apostado al mercado Ganador con un momio de <strong>${oddsAmG > 0 ? '+' : ''}${oddsAmG}</strong>, es decir, que tu equipo gane el torneo. En caso de acertar, obtendrías un pago potencial de <strong>${fmtMXN(payG)} MXN</strong>. 🏆</span>
-    <span class="ew-rocket">🚀 <strong>Apuesta al mercado Colocado:</strong> La segunda parte de tu apuesta se ha realizado al mercado Colocado, con un momio equivalente a una parte del momio original, lo que daría un momio de <strong>${oddsAmC > 0 ? '+' : ''}${oddsAmC}</strong>. En este caso, estás apostando a que tu equipo finalice entre las primeras posiciones del torneo. Si aciertas, recibirías un pago potencial de <strong>${fmtMXN(payC)} MXN</strong>. 🥈</span>
-    <span>👉 <strong>En resumen,</strong> el pago potencial de tu apuesta es de <strong>${fmtMXN(payTotal)} MXN</strong>, correspondiente al mercado Ganador con el momio total aplicado sobre tu parte de inversión.</span>`;
+    <span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtFn(each*2)} ${cur}</strong> se divide en dos partes iguales:</span>
+    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtFn(payG)} ${cur}</strong></span>
+    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtFn(payC)} ${cur}</strong></span>`;
+}
+
+function buildNarrativeMX(each, oddsAmG, oddsAmC, payG, payC, payTotal, frac){
+  const posLabel = frac===2 ? '2° posición' : '2° o 3° posición';
+  return `
+    <span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtMXN(each*2)} MXN</strong> se divide en dos partes iguales:</span>
+    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtMXN(payG)} MXN</strong></span>
+    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtMXN(payC)} MXN</strong></span>`;
 }
 
 function calcEW_PE(){
@@ -984,24 +1006,24 @@ function calcEW_PE(){
   const odds =parseFloat(document.getElementById('pe-odds').value);
   const frac =parseFloat(document.getElementById('pe-frac').value);
   const narr =document.getElementById('pe-narrative');
-  if(isNaN(total)||isNaN(odds)||odds<=1){
-    ['pe-each','pe-odds-g','pe-odds-c','pe-pay-g','pe-pay-c','pe-pay-total'].forEach(id=>setVal(id,''));
-    narr.classList.remove('visible'); narr.innerHTML=''; return;
-  }
+  const cards=document.getElementById('pe-cards');
+  if(isNaN(total)||isNaN(odds)||odds<=1){ cards.style.display='none'; narr.innerHTML=''; return; }
   const each  = total/2;
   const oddsG = odds;
   const oddsC = r2(1+((odds-1)/frac));
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
-  const payT  = payG; // Pago total = Pago Ganador
-  setFmt('pe-each',     each,  fmtPEN);
-  setVal('pe-odds-g',   r2(oddsG));
-  setVal('pe-odds-c',   r2(oddsC));
-  setFmt('pe-pay-g',    payG,  fmtPEN);
-  setFmt('pe-pay-c',    payC,  fmtPEN);
-  setFmt('pe-pay-total',payT,  fmtPEN);
-  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'Soles',fmtPEN,odds.toFixed(2));
-  narr.classList.add('visible');
+  const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
+  setCard('pe-c-pos-title', posLabel);
+  setCard('pe-c-each-g', fmtPEN(each)+' Soles');
+  setCard('pe-c-each-c', fmtPEN(each)+' Soles');
+  setCard('pe-c-odds-g', oddsG.toFixed(2));
+  setCard('pe-c-odds-c', oddsC.toFixed(2));
+  setCard('pe-c-pay-g',  fmtPEN(payG)+' Soles');
+  setCard('pe-c-pay-c',  fmtPEN(payC)+' Soles');
+  setCard('pe-c-total',  fmtPEN(total)+' Soles');
+  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'Soles',fmtPEN,odds.toFixed(2),frac);
+  cards.style.display='block';
 }
 </script>
 </body>
