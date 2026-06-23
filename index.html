@@ -694,37 +694,25 @@
         </div>
       </div>
       <div id="co-cards" style="display:none">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
           <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
-            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="co-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
-              <div id="co-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="co-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
-            </div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🥇 Si queda 1°</div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="co-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div><div id="co-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="co-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div></div>
           </div>
           <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="co-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="co-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
-              <div id="co-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="co-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
-            </div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="co-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div><div id="co-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="co-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div></div>
           </div>
+        </div>
+        <!-- SI GANA = suma ambas -->
+        <div style="background:linear-gradient(135deg,rgba(0,200,150,0.1),rgba(255,183,71,0.1));border:1px solid rgba(255,183,71,0.4);border-radius:12px;padding:18px 22px;margin-bottom:14px">
+          <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#ffb747;font-weight:700;margin-bottom:10px">🏆 Si gana — Pago total (ambas apuestas)</div>
+          <div style="font-size:.82rem;color:var(--card-sub);margin-bottom:8px"><span id="co-c-pay-g-label">—</span> + <span id="co-c-pay-c-label">—</span></div>
+          <div id="co-c-pay-total" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#ffb747;letter-spacing:1px">—</div>
         </div>
         <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="co-c-total" style="color:#ffb747">—</strong>
@@ -758,37 +746,24 @@
         </div>
       </div>
       <div id="mx-cards" style="display:none">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
           <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
-            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="mx-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio</div>
-              <div id="mx-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="mx-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
-            </div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🥇 Si queda 1°</div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="mx-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio</div><div id="mx-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="mx-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div></div>
           </div>
           <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="mx-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="mx-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio colocado</div>
-              <div id="mx-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="mx-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
-            </div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="mx-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Momio colocado</div><div id="mx-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="mx-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div></div>
           </div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(0,200,150,0.1),rgba(255,183,71,0.1));border:1px solid rgba(255,183,71,0.4);border-radius:12px;padding:18px 22px;margin-bottom:14px">
+          <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#ffb747;font-weight:700;margin-bottom:10px">🏆 Si gana — Pago total (ambas apuestas)</div>
+          <div style="font-size:.82rem;color:var(--card-sub);margin-bottom:8px"><span id="mx-c-pay-g-label">—</span> + <span id="mx-c-pay-c-label">—</span></div>
+          <div id="mx-c-pay-total" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#ffb747;letter-spacing:1px">—</div>
         </div>
         <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="mx-c-total" style="color:#ffb747">—</strong>
@@ -822,37 +797,24 @@
         </div>
       </div>
       <div id="pe-cards" style="display:none">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
           <div style="background:var(--card-bg-win);border:1px solid var(--card-border-win);border-radius:12px;padding:18px 20px">
-            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🏆 Si gana</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="pe-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div>
-              <div id="pe-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="pe-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div>
-            </div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--win);font-weight:700;margin-bottom:12px">🥇 Si queda 1°</div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="pe-c-each-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota</div><div id="pe-c-odds-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,200,150,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="pe-c-pay-g" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--win);letter-spacing:1px">—</div></div>
           </div>
           <div style="background:var(--card-bg-blue);border:1px solid var(--card-border-blue);border-radius:12px;padding:18px 20px">
             <div id="pe-c-pos-title" style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);font-weight:700;margin-bottom:12px">🥈 Si queda 2°</div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div>
-              <div id="pe-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="margin-bottom:8px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div>
-              <div id="pe-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div>
-            </div>
-            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px">
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div>
-              <div id="pe-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div>
-            </div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Apuesta</div><div id="pe-c-each-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="margin-bottom:8px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Cuota colocado</div><div id="pe-c-odds-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--card-num);letter-spacing:1px">—</div></div>
+            <div style="border-top:1px solid rgba(0,151,255,0.2);padding-top:10px;margin-top:4px"><div style="font-size:.72rem;color:var(--muted);margin-bottom:2px">Pago potencial</div><div id="pe-c-pay-c" style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--accent2);letter-spacing:1px">—</div></div>
           </div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(0,200,150,0.1),rgba(255,183,71,0.1));border:1px solid rgba(255,183,71,0.4);border-radius:12px;padding:18px 22px;margin-bottom:14px">
+          <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#ffb747;font-weight:700;margin-bottom:10px">🏆 Si gana — Pago total (ambas apuestas)</div>
+          <div style="font-size:.82rem;color:var(--card-sub);margin-bottom:8px"><span id="pe-c-pay-g-label">—</span> + <span id="pe-c-pay-c-label">—</span></div>
+          <div id="pe-c-pay-total" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#ffb747;letter-spacing:1px">—</div>
         </div>
         <div style="background:rgba(255,183,71,0.07);border:1px solid rgba(255,183,71,0.25);border-radius:10px;padding:12px 18px;font-size:.84rem;color:var(--card-sub);text-align:center">
           Total apostado real: <strong id="pe-c-total" style="color:#ffb747">—</strong>
@@ -1170,6 +1132,7 @@ function calcEW_CO(){
   const oddsC = r2(((odds-1)/frac)+1);
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
+  const payT  = r2(payG+payC);
   const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
   setCard('co-c-pos-title',posLabel);
   setCard('co-c-each-g',fmtCOP(each)+' COP');
@@ -1178,8 +1141,11 @@ function calcEW_CO(){
   setCard('co-c-odds-c',oddsC.toFixed(2));
   setCard('co-c-pay-g', fmtCOP(payG)+' COP');
   setCard('co-c-pay-c', fmtCOP(payC)+' COP');
+  setCard('co-c-pay-g-label', fmtCOP(payG)+' COP');
+  setCard('co-c-pay-c-label', fmtCOP(payC)+' COP');
+  setCard('co-c-pay-total', fmtCOP(payT)+' COP');
   setCard('co-c-total', fmtCOP(total)+' COP');
-  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'COP',fmtCOP,odds.toFixed(2),frac);
+  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'COP',fmtCOP,odds.toFixed(2),frac);
   cards.style.display='block';
 }
 
@@ -1197,6 +1163,7 @@ function calcEW_MX(){
   const oddsCam=oddsDecC>=2?Math.round((oddsDecC-1)*100):Math.round(-100/(oddsDecC-1));
   const payG   = r2(each*oddsDecG);
   const payC   = r2(each*oddsDecC);
+  const payT   = r2(payG+payC);
   const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
   setCard('mx-c-pos-title',posLabel);
   setCard('mx-c-each-g',fmtMXN(each)+' MXN');
@@ -1205,23 +1172,28 @@ function calcEW_MX(){
   setCard('mx-c-odds-c',(oddsCam>0?'+':'')+oddsCam);
   setCard('mx-c-pay-g', fmtMXN(payG)+' MXN');
   setCard('mx-c-pay-c', fmtMXN(payC)+' MXN');
+  setCard('mx-c-pay-g-label', fmtMXN(payG)+' MXN');
+  setCard('mx-c-pay-c-label', fmtMXN(payC)+' MXN');
+  setCard('mx-c-pay-total', fmtMXN(payT)+' MXN');
   setCard('mx-c-total', fmtMXN(total)+' MXN');
-  narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payG,frac);
+  narr.innerHTML=buildNarrativeMX(each,oddsAm,oddsCam,payG,payC,payT,frac);
   cards.style.display='block';
 }
 
-function buildNarrative(each,oddsG,oddsC,payG,payC,payTotal,cur,fmtFn,oddsLabel,frac){
+function buildNarrative(each,oddsG,oddsC,payG,payC,payT,cur,fmtFn,oddsLabel,frac){
   const posLabel=frac===2?'2° posición':'2° o 3° posición';
   return `<span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtFn(each*2)} ${cur}</strong> se divide en dos partes iguales:</span>
-    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtFn(payG)} ${cur}</strong></span>
-    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtFn(payC)} ${cur}</strong></span>`;
+    <span class="ew-rocket">🥇 <strong>Si queda 1°:</strong> te pagamos <strong>${fmtFn(payG)} ${cur}</strong> (apuesta ganador)</span>
+    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtFn(payC)} ${cur}</strong> (apuesta colocado)</span>
+    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos ambas partes — <strong>${fmtFn(payT)} ${cur}</strong></span>`;
 }
 
-function buildNarrativeMX(each,oddsAmG,oddsAmC,payG,payC,payTotal,frac){
+function buildNarrativeMX(each,oddsAmG,oddsAmC,payG,payC,payT,frac){
   const posLabel=frac===2?'2° posición':'2° o 3° posición';
   return `<span class="ew-rocket">Tu apuesta Each Way de <strong>${fmtMXN(each*2)} MXN</strong> se divide en dos partes iguales:</span>
-    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos <strong>${fmtMXN(payG)} MXN</strong></span>
-    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtMXN(payC)} MXN</strong></span>`;
+    <span class="ew-rocket">🥇 <strong>Si queda 1°:</strong> te pagamos <strong>${fmtMXN(payG)} MXN</strong> (apuesta ganador)</span>
+    <span class="ew-rocket">🥈 <strong>Si queda en ${posLabel}:</strong> te pagamos <strong>${fmtMXN(payC)} MXN</strong> (apuesta colocado)</span>
+    <span class="ew-rocket">🏆 <strong>Si gana:</strong> te pagamos ambas partes — <strong>${fmtMXN(payT)} MXN</strong></span>`;
 }
 
 function calcEW_PE(){
@@ -1236,6 +1208,7 @@ function calcEW_PE(){
   const oddsC = r2(1+((odds-1)/frac));
   const payG  = r2(each*oddsG);
   const payC  = r2(each*oddsC);
+  const payT  = r2(payG+payC);
   const posLabel=frac===2?'🥈 Si queda 2°':'🥈 Si queda 2° o 3°';
   setCard('pe-c-pos-title',posLabel);
   setCard('pe-c-each-g',fmtPEN(each)+' Soles');
@@ -1244,8 +1217,11 @@ function calcEW_PE(){
   setCard('pe-c-odds-c',oddsC.toFixed(2));
   setCard('pe-c-pay-g', fmtPEN(payG)+' Soles');
   setCard('pe-c-pay-c', fmtPEN(payC)+' Soles');
+  setCard('pe-c-pay-g-label', fmtPEN(payG)+' Soles');
+  setCard('pe-c-pay-c-label', fmtPEN(payC)+' Soles');
+  setCard('pe-c-pay-total', fmtPEN(payT)+' Soles');
   setCard('pe-c-total', fmtPEN(total)+' Soles');
-  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payG,'Soles',fmtPEN,odds.toFixed(2),frac);
+  narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'Soles',fmtPEN,odds.toFixed(2),frac);
   cards.style.display='block';
 }
 /* ── THEME ── */
