@@ -1284,15 +1284,18 @@ function calcEW_PE(){
 const countryMode = {};
 function setCountry(pfx, country, btn){
   countryMode[pfx] = country;
-  btn.closest('.odds-toggle').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  btn.closest('.odds-wrap').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   const input = document.getElementById(pfx+'-odds');
+  const label = btn.closest('.odds-wrap').querySelector('label');
   if(country==='MX'){
     input.placeholder='Ej: +1800 o -150';
     input.step='1'; input.min='';
+    if(label) label.textContent='Momio (MX)';
   } else {
     const ph = pfx==='h'?'Ej: 1.85': pfx==='t'?'Ej: 1.95':'Ej: 4.30';
     input.placeholder=ph; input.step='0.01'; input.min='1.01';
+    if(label) label.textContent='Cuota';
   }
   input.value='';
 }
@@ -1329,6 +1332,9 @@ function resetAll(){
   ['h-odds','t-odds','co-odds','pe-odds'].forEach(id=>{
     const el=document.getElementById(id);
     if(el){ el.step='0.01'; el.min='1.01'; el.placeholder=id==='h-odds'?'Ej: 1.85':id==='t-odds'?'Ej: 1.95':'Ej: 4.30'; }
+    // Reset label
+    const wrap=el?el.closest('.odds-wrap'):null;
+    if(wrap){ const lbl=wrap.querySelector('label'); if(lbl) lbl.textContent=id.includes('odds')&&!id.includes('am')?'Cuota':'Cuota total'; }
   });
 }
 </script>
