@@ -69,7 +69,13 @@
   body.light .score-vs{color:#8892b0}
   body.light .section-label{color:#8892b0}
 
-  /* HEADER CONTROLS */
+  /* ODDS TOGGLE */
+  .odds-wrap{display:flex;flex-direction:column;gap:6px}
+  .odds-toggle{display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content}
+  .odds-toggle button{padding:4px 12px;font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;background:none;border:none;color:var(--muted);cursor:pointer;transition:all .2s}
+  .odds-toggle button.active{background:var(--accent);color:#0d0f14}
+  body.light .odds-toggle button.active{color:#fff}
+
   .header-controls{display:flex;align-items:center;gap:10px;margin-left:auto}
   .btn-theme{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1.1rem;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
   .btn-theme:hover{border-color:var(--accent)}
@@ -383,7 +389,7 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Cuota</label><input type="number" id="h-odds" placeholder="Ej: 1.85" step="0.01" min="1" value=""></div>
+      <div class="form-group"><div class="odds-wrap"><label>Cuota</label><div class="odds-toggle"><button class="active" onclick="setOddsMode('h','dec',this)">Decimal</button><button onclick="setOddsMode('h','mom',this)">Momio</button></div><input type="number" id="h-odds" placeholder="Ej: 1.85" step="0.01" min="1" value=""></div></div>
     </div>
     <button class="btn-calc" onclick="calcHandicap()">CALCULAR RESULTADO</button>
     <div id="h-result" class="result-box"></div>
@@ -587,7 +593,7 @@
         <label>Tipo de apuesta</label>
         <div class="select-wrap"><select id="t-type"><option value="over">Más (Over)</option><option value="under">Menos (Under)</option></select></div>
       </div>
-      <div class="form-group"><label>Cuota</label><input type="number" id="t-odds" placeholder="Ej: 1.95" step="0.01" min="1" value=""></div>
+      <div class="form-group"><div class="odds-wrap"><label>Cuota</label><div class="odds-toggle"><button class="active" onclick="setOddsMode('t','dec',this)">Decimal</button><button onclick="setOddsMode('t','mom',this)">Momio</button></div><input type="number" id="t-odds" placeholder="Ej: 1.95" step="0.01" min="1" value=""></div></div>
     </div>
     <button class="btn-calc blue" onclick="calcTotals()">CALCULAR RESULTADO</button>
     <div id="t-result" class="result-box"></div>
@@ -680,8 +686,11 @@
           <input type="number" id="co-total" placeholder="Ej: 40000" min="1" oninput="calcEW_CO()">
         </div>
         <div class="form-group">
-          <label>Cuota total</label>
-          <input type="number" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()">
+          <div class="odds-wrap">
+            <label>Cuota total</label>
+            <div class="odds-toggle"><button class="active" onclick="setOddsMode('co','dec',this)">Decimal</button><button onclick="setOddsMode('co','mom',this)">Momio</button></div>
+            <input type="number" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()">
+          </div>
         </div>
       </div>
       <div class="form-group" style="margin-bottom:20px">
@@ -783,8 +792,11 @@
           <input type="number" id="pe-total" placeholder="Ej: 80" min="1" oninput="calcEW_PE()">
         </div>
         <div class="form-group">
-          <label>Cuota total</label>
-          <input type="number" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()">
+          <div class="odds-wrap">
+            <label>Cuota total</label>
+            <div class="odds-toggle"><button class="active" onclick="setOddsMode('pe','dec',this)">Decimal</button><button onclick="setOddsMode('pe','mom',this)">Momio</button></div>
+            <input type="number" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()">
+          </div>
         </div>
       </div>
       <div class="form-group" style="margin-bottom:20px">
@@ -891,7 +903,7 @@ function calcHandicap(){
   const away=parseInt(document.getElementById('h-away').value)||0;
   const team=document.getElementById('h-team').value;
   const line=parseFloat(document.getElementById('h-line').value);
-  const odds=document.getElementById('h-odds').value;
+  const odds=getOddsDecimal('h');
   const diff=(team==='home')?(home-away):(away-home);
   const abs=Math.abs(line);
   const dec=Math.round((abs%1)*100)/100;
@@ -923,7 +935,7 @@ function calcTotals(){
   const goals=parseInt(document.getElementById('t-goals').value);
   const line=parseFloat(document.getElementById('t-line').value);
   const type=document.getElementById('t-type').value;
-  const odds=document.getElementById('t-odds').value;
+  const odds=getOddsDecimal('t');
   if(isNaN(goals)){alert('Por favor ingresa los goles marcados.');return;}
   const dec=Math.round((line%1)*100)/100;
   let verdict;
@@ -939,7 +951,7 @@ function calc3Way(){
   const favteam=document.getElementById('w-favteam').value;
   const hcap=parseInt(document.getElementById('w-hcap').value);
   const bet=document.getElementById('w-bet').value;
-  if(isNaN(hcap)||hcap<1){alert('Por favor ingresa los goles de ventaja.');return;}
+  if(isNaN(hcap)||hcap<1){alert('Por favor ingresa la ventaja.');return;}
   // apply handicap: favored team gets +hcap
   let adjHome=home, adjAway=away;
   if(favteam==='home') adjHome=home+hcap;
@@ -1122,7 +1134,7 @@ function tLookup(){
 
 function calcEW_CO(){
   const total=parseFloat(document.getElementById('co-total').value);
-  const odds =parseFloat(document.getElementById('co-odds').value);
+  const odds =getOddsDecimal('co');
   const frac =parseFloat(document.getElementById('co-frac').value);
   const narr =document.getElementById('co-narrative');
   const cards=document.getElementById('co-cards');
@@ -1198,7 +1210,7 @@ function buildNarrativeMX(each,oddsAmG,oddsAmC,payG,payC,payT,frac){
 
 function calcEW_PE(){
   const total=parseFloat(document.getElementById('pe-total').value);
-  const odds =parseFloat(document.getElementById('pe-odds').value);
+  const odds =getOddsDecimal('pe');
   const frac =parseFloat(document.getElementById('pe-frac').value);
   const narr =document.getElementById('pe-narrative');
   const cards=document.getElementById('pe-cards');
@@ -1224,7 +1236,32 @@ function calcEW_PE(){
   narr.innerHTML=buildNarrative(each,oddsG,oddsC,payG,payC,payT,'Soles',fmtPEN,odds.toFixed(2),frac);
   cards.style.display='block';
 }
-/* ── THEME ── */
+/* ── ODDS MODE TOGGLE ── */
+const oddsModes = {};
+function setOddsMode(pfx, mode, btn){
+  oddsModes[pfx] = mode;
+  btn.closest('.odds-toggle').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const input = document.getElementById(pfx+'-odds');
+  if(mode==='mom'){
+    input.placeholder='Ej: +1800 o -150';
+    input.step='1';
+    input.min='';
+  } else {
+    input.placeholder=pfx==='h'?'Ej: 1.85':pfx==='t'?'Ej: 1.95':'Ej: 4.30';
+    input.step='0.01';
+    input.min='1.01';
+  }
+  input.value='';
+}
+
+function getOddsDecimal(pfx){
+  const raw = parseFloat(document.getElementById(pfx+'-odds').value);
+  if(isNaN(raw)) return NaN;
+  if(oddsModes[pfx]==='mom') return mxAmeToDecimal(raw);
+  return raw;
+}
+</script>
 function toggleTheme(){
   const body=document.body;
   const btn=document.getElementById('theme-btn');
