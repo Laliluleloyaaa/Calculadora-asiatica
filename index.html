@@ -1284,10 +1284,11 @@ function calcEW_PE(){
 const countryMode = {};
 function setCountry(pfx, country, btn){
   countryMode[pfx] = country;
-  btn.closest('.odds-wrap').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  const wrap = document.getElementById(pfx+'-odds').closest('.odds-wrap');
+  wrap.querySelectorAll('.odds-toggle button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   const input = document.getElementById(pfx+'-odds');
-  const label = btn.closest('.odds-wrap').querySelector('label');
+  const label = wrap.querySelector('label');
   if(country==='MX'){
     input.placeholder='Ej: +1800 o -150';
     input.step='1'; input.min='';
