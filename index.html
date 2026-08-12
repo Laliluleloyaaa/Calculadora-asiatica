@@ -155,12 +155,61 @@
   .ref-table .ra{color:var(--push);font-weight:600}
   @media(max-width:700px){.ref-split{grid-template-columns:1fr}}
   @media(max-width:600px){
-    header{padding:20px;flex-direction:column;align-items:flex-start;gap:4px}
-    .tabs{padding:0 16px}
-    .tab-btn{padding:14px 16px;font-size:.8rem}
-    .tab-content{padding:16px}
-    .calc-card,.ref-card{padding:18px}
-    .form-row{grid-template-columns:1fr}
+    /* HEADER */
+    header{padding:14px 16px;flex-direction:column;align-items:flex-start;gap:6px}
+    header h1{font-size:1.5rem}
+    header p{font-size:.72rem}
+    .header-controls{width:100%;justify-content:flex-end}
+
+    /* TABS — scroll horizontal en lugar de colapsar */
+    .tabs{padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab-btn{padding:12px 14px;font-size:.75rem;white-space:nowrap;flex-shrink:0}
+
+    /* CONTENT */
+    .tab-content{padding:12px}
+    .calc-card,.ref-card{padding:16px;border-radius:12px;margin-bottom:14px}
+    .calc-card h2{font-size:1.1rem;margin-bottom:16px}
+
+    /* FORMS */
+    .form-row{grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+    select,input[type=number]{padding:12px 14px;font-size:1rem}
+    .btn-calc{padding:15px;font-size:1rem}
+
+    /* SCORE ROW */
+    .score-row input{width:64px;font-size:1.1rem;padding:8px 4px}
+
+    /* ODDS TOGGLE — botones más grandes para dedos */
+    .odds-toggle button{padding:6px 10px;font-size:.68rem}
+
+    /* EW COUNTRY BUTTONS */
+    .ew-country-btn{font-size:.75rem !important;padding:10px 8px !important}
+
+    /* EW CARDS — columna en móvil */
+    [id$="-cards"] > div:first-child{grid-template-columns:1fr !important}
+
+    /* RESULT CARDS 3WAY — columna en móvil */
+    .result-body > div[style*="grid-template-columns:1fr 1fr"]{
+      display:flex !important;flex-direction:column !important;gap:10px
+    }
+
+    /* REF TABLE — más pequeña */
+    .ref-table{font-size:.7rem}
+    .ref-table td,.ref-table th{padding:4px 5px}
+
+    /* LOOKUP SELECT */
+    .ref-card .select-wrap select{font-size:.85rem;padding:9px 10px}
+
+    /* NARRATIVE */
+    .ew-narrative{font-size:.82rem;padding:14px}
+
+    /* NOTE BOX */
+    .note-box{font-size:.8rem;padding:12px}
+
+    /* RESULT BOX */
+    .result-verdict{font-size:1.3rem}
+    .result-header{padding:12px 16px;font-size:.85rem}
+    .result-body{padding:14px 16px 18px}
   }
 </style>
 </head>
@@ -360,9 +409,9 @@
   </div>
     <div class="section-label">Resultado del partido</div>
     <div class="score-row">
-      <div class="score-col"><input type="number" id="h-home" value="0" min="0" max="20"><div class="score-label">Local</div></div>
+      <div class="score-col"><input type="number" inputmode="numeric" id="h-home" value="0" min="0" max="20"><div class="score-label">Local</div></div>
       <div class="score-vs">VS</div>
-      <div class="score-col"><input type="number" id="h-away" value="0" min="0" max="20"><div class="score-label">Visitante</div></div>
+      <div class="score-col"><input type="number" inputmode="numeric" id="h-away" value="0" min="0" max="20"><div class="score-label">Visitante</div></div>
     </div>
     <div class="form-row">
       <div class="form-group">
@@ -397,7 +446,7 @@
             <button onclick="setCountry('h','MX',this)">🇲🇽 MX</button>
             <button onclick="setCountry('h','PE',this)">🇵🇪 PE</button>
           </div>
-          <input type="number" id="h-odds" placeholder="Ej: 1.85" step="0.01" min="1" value="">
+          <input type="number" inputmode="numeric" id="h-odds" placeholder="Ej: 1.85" step="0.01" min="1" value="">
         </div>
       </div>
     </div>
@@ -578,7 +627,7 @@
   </div>
     <div class="section-label">Goles totales en el partido</div>
     <div class="form-row">
-      <div class="form-group"><label>Goles marcados</label><input type="number" id="t-goals" placeholder="Ej: 2" min="0" max="30" value=""></div>
+      <div class="form-group"><label>Goles marcados</label><input type="number" inputmode="numeric" id="t-goals" placeholder="Ej: 2" min="0" max="30" value=""></div>
       <div class="form-group">
         <label>Línea de totales</label>
         <div class="select-wrap">
@@ -611,7 +660,7 @@
             <button onclick="setCountry('t','MX',this)">🇲🇽 MX</button>
             <button onclick="setCountry('t','PE',this)">🇵🇪 PE</button>
           </div>
-          <input type="number" id="t-odds" placeholder="Ej: 1.95" step="0.01" min="1" value="">
+          <input type="number" inputmode="numeric" id="t-odds" placeholder="Ej: 1.95" step="0.01" min="1" value="">
         </div>
       </div>
     </div>
@@ -628,9 +677,9 @@
 
     <div class="section-label">Resultado real del partido</div>
     <div class="score-row">
-      <div class="score-col"><input type="number" id="w-home" value="0" min="0" max="20" style="border-color:rgba(176,108,255,0.3)"><div class="score-label">Local</div></div>
+      <div class="score-col"><input type="number" inputmode="numeric" id="w-home" value="0" min="0" max="20" style="border-color:rgba(176,108,255,0.3)"><div class="score-label">Local</div></div>
       <div class="score-vs">VS</div>
-      <div class="score-col"><input type="number" id="w-away" value="0" min="0" max="20" style="border-color:rgba(176,108,255,0.3)"><div class="score-label">Visitante</div></div>
+      <div class="score-col"><input type="number" inputmode="numeric" id="w-away" value="0" min="0" max="20" style="border-color:rgba(176,108,255,0.3)"><div class="score-label">Visitante</div></div>
     </div>
 
     <div class="form-row">
@@ -645,7 +694,7 @@
       </div>
       <div class="form-group">
         <label>Ventaja</label>
-        <input type="number" id="w-hcap" placeholder="Ej: 3" min="1" max="10" value="">
+        <input type="number" inputmode="numeric" id="w-hcap" placeholder="Ej: 3" min="1" max="10" value="">
       </div>
     </div>
 
@@ -703,7 +752,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Valor total de la apuesta</label>
-          <input type="number" id="co-total" placeholder="Ej: 40000" min="1" oninput="calcEW_CO()">
+          <input type="number" inputmode="numeric" id="co-total" placeholder="Ej: 40000" min="1" oninput="calcEW_CO()">
         </div>
         <div class="form-group">
           <div class="odds-wrap">
@@ -713,7 +762,7 @@
               <button onclick="setCountry('co','MX',this)">🇲🇽 MX</button>
               <button onclick="setCountry('co','PE',this)">🇵🇪 PE</button>
             </div>
-            <input type="number" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()">
+            <input type="number" inputmode="numeric" id="co-odds" placeholder="Ej: 4.30" step="0.01" min="1.01" oninput="calcEW_CO()">
           </div>
         </div>
       </div>
@@ -762,11 +811,11 @@
       <div class="form-row">
         <div class="form-group">
           <label>Valor total de la apuesta</label>
-          <input type="number" id="mx-total" placeholder="Ej: 400" min="1" oninput="calcEW_MX()">
+          <input type="number" inputmode="numeric" id="mx-total" placeholder="Ej: 400" min="1" oninput="calcEW_MX()">
         </div>
         <div class="form-group">
           <label>Momio (MX)</label>
-          <input type="number" id="mx-odds-am" placeholder="Ej: 1800 o -150" oninput="calcEW_MX()">
+          <input type="number" inputmode="numeric" id="mx-odds-am" placeholder="Ej: 1800 o -150" oninput="calcEW_MX()">
         </div>
       </div>
       <div class="form-group" style="margin-bottom:20px">
@@ -813,7 +862,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Valor total de la apuesta</label>
-          <input type="number" id="pe-total" placeholder="Ej: 80" min="1" oninput="calcEW_PE()">
+          <input type="number" inputmode="numeric" id="pe-total" placeholder="Ej: 80" min="1" oninput="calcEW_PE()">
         </div>
         <div class="form-group">
           <div class="odds-wrap">
@@ -823,7 +872,7 @@
               <button onclick="setCountry('pe','MX',this)">🇲🇽 MX</button>
               <button onclick="setCountry('pe','PE',this)">🇵🇪 PE</button>
             </div>
-            <input type="number" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()">
+            <input type="number" inputmode="numeric" id="pe-odds" placeholder="Ej: 7.50" step="0.01" min="1.01" oninput="calcEW_PE()">
           </div>
         </div>
       </div>
