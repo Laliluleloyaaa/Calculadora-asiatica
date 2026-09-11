@@ -942,21 +942,63 @@ function decToMomio(dec){
 function noteHalfWin(odds, pfx){
   odds=parseFloat(odds);
   const isMX=(countryMode[pfx]==='MX');
-  let ex='';
+  let calcBlock='';
   if(!isNaN(odds)&&odds>=1){
-    const half = 1 + (odds-1)/2;
+    const half=1+(odds-1)/2;
     if(isMX){
       const momOrig=decToMomio(odds);
       const momHalf=decToMomio(half);
-      ex=`<br><br>Con tu momio <strong>${momOrig}</strong>: momio efectivo → <strong>${momHalf}</strong>`;
+      calcBlock=`
+        <div style="background:rgba(255,181,71,0.12);border:1px solid rgba(255,181,71,0.4);border-radius:10px;padding:14px 18px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div style="text-align:center">
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Momio ingresado</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--card-num);letter-spacing:1px">${momOrig}</div>
+          </div>
+          <div style="font-size:1.4rem;color:var(--muted)">→</div>
+          <div style="text-align:center">
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Momio efectivo</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#ffb547;letter-spacing:1px">${momHalf}</div>
+          </div>
+        </div>`;
     } else {
-      ex=`<br><br>Con tu cuota <strong>${odds.toFixed(2)}</strong>: cuota efectiva → <strong>${half.toFixed(2)}</strong>`;
+      calcBlock=`
+        <div style="background:rgba(255,181,71,0.12);border:1px solid rgba(255,181,71,0.4);border-radius:10px;padding:14px 18px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div style="text-align:center">
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Cuota ingresada</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--card-num);letter-spacing:1px">${odds.toFixed(2)}</div>
+          </div>
+          <div style="font-size:1.4rem;color:var(--muted)">→</div>
+          <div style="text-align:center">
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Cuota efectiva</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#ffb547;letter-spacing:1px">${half.toFixed(2)}</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Cálculo</div>
+            <div style="font-size:.82rem;color:var(--card-sub)">1 + (${odds.toFixed(2)} − 1) ÷ 2</div>
+            <div style="font-size:.82rem;color:var(--card-sub)">= 1 + ${((odds-1)/2).toFixed(2)} = <strong style="color:#ffb747">${half.toFixed(2)}</strong></div>
+          </div>
+        </div>`;
     }
   }
-  if(isMX){
-    return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>Solo se paga la mitad de la ganancia — tu apuesta siempre se devuelve completa. La cuota efectiva se calcula como: <strong>1 + (momio decimal − 1) ÷ 2</strong><ul><li>🧾 Ejemplo: momio +260 (cuota 3.60) → ganancia = 2.60 → mitad = 1.30 → cuota efectiva 2.30 → momio +130</li></ul>${ex}</div>`;
-  }
-  return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>Solo se paga la mitad de la ganancia — tu apuesta siempre se devuelve completa. La cuota efectiva se calcula como: <strong>1 + (cuota − 1) ÷ 2</strong><ul><li>🧾 Ejemplo: cuota 2.16 → ganancia = 1.16 → mitad = 0.58 → cuota efectiva = <strong>1.58</strong></li><li>🧾 Ejemplo: cuota 1.64 → ganancia = 0.64 → mitad = 0.32 → cuota efectiva = <strong>1.32</strong></li></ul>${ex}</div>`;
+
+  const uid='hw'+Math.random().toString(36).slice(2,7);
+  const exMX=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad se calcula siempre sobre la <strong>ganancia</strong>, no sobre la cuota completa.</div><div style="white-space:nowrap;overflow:auto">🧾 momio +260 (cuota 3.60) → ganancia 2.60 → mitad 1.30 → momio efectivo <strong style="color:#ffb747">+130</strong></div></div>`;
+  const exDec=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad se calcula siempre sobre la <strong>ganancia</strong> (cuota − 1), no sobre la cuota completa.</div><div style="white-space:nowrap;overflow:auto">🧾 Cuota 2.16 → ganancia 1.16 → mitad 0.58 → cuota efectiva <strong style="color:#ffb747">1.58</strong></div><div style="white-space:nowrap;overflow:auto">🧾 Cuota 1.64 → ganancia 0.64 → mitad 0.32 → cuota efectiva <strong style="color:#ffb747">1.32</strong></div></div>`;
+
+  return `<div class="note-box">
+    <strong>⚡ GANAS LA MITAD</strong>
+    Tu apuesta se devuelve completa — solo la ganancia se divide a la mitad.
+    ${calcBlock}
+    <div style="margin-top:10px">
+      <button onclick="document.getElementById('${uid}').style.display=document.getElementById('${uid}').style.display==='none'?'block':'none'"
+        style="background:none;border:1px solid rgba(255,181,71,0.3);border-radius:6px;color:#ffb547;font-size:.74rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:5px 12px;cursor:pointer">
+        ℹ️ ¿Cómo se calcula? ▾
+      </button>
+      <div id="${uid}" style="display:none;margin-top:8px;font-size:.82rem;color:var(--card-sub);line-height:1.7">
+        ${isMX?exMX:exDec}
+      </div>
+    </div>
+  </div>`;
 }
 
 function noteHalfLose(pfx){
