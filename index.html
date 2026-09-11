@@ -944,8 +944,7 @@ function noteHalfWin(odds, pfx){
   const isMX=(countryMode[pfx]==='MX');
   let ex='';
   if(!isNaN(odds)&&odds>=1){
-    let half;
-    if(odds>=1&&odds<2){ half=1+(odds-1)/2; } else { half=odds/2; }
+    const half = 1 + (odds-1)/2;
     if(isMX){
       const momOrig=decToMomio(odds);
       const momHalf=decToMomio(half);
@@ -955,9 +954,9 @@ function noteHalfWin(odds, pfx){
     }
   }
   if(isMX){
-    return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>El cálculo se realiza con base en el momio, ya que representa la ganancia potencial.<ul><li>Si el momio es positivo, se divide entre 2.<br>🧾 Ejemplo: momio +260 → mitad = +130</li><li>Si el momio es negativo, se calcula la cuota decimal equivalente y se divide.<br>🧾 Ejemplo: momio -150 → cuota 1.67 → mitad = cuota 1.33 → momio -300</li></ul>${ex}</div>`;
+    return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>Solo se paga la mitad de la ganancia — tu apuesta siempre se devuelve completa. La cuota efectiva se calcula como: <strong>1 + (momio decimal − 1) ÷ 2</strong><ul><li>🧾 Ejemplo: momio +260 (cuota 3.60) → ganancia = 2.60 → mitad = 1.30 → cuota efectiva 2.30 → momio +130</li></ul>${ex}</div>`;
   }
-  return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>El cálculo se realiza con base en la cuota, ya que representa la ganancia potencial.<ul><li>Si la cuota empieza con <strong>1</strong>, la mitad se calcula sobre los decimales.<br>🧾 Ejemplo: cuota 1.64 → mitad = 1.32</li><li>Si la cuota empieza con <strong>2 o más</strong>, la mitad se calcula sobre el total.<br>🧾 Ejemplo: cuota 2.60 → mitad = 1.30</li></ul>${ex}</div>`;
+  return `<div class="note-box"><strong>ℹ️ Cómo funciona "Gana la Mitad"</strong>Solo se paga la mitad de la ganancia — tu apuesta siempre se devuelve completa. La cuota efectiva se calcula como: <strong>1 + (cuota − 1) ÷ 2</strong><ul><li>🧾 Ejemplo: cuota 2.16 → ganancia = 1.16 → mitad = 0.58 → cuota efectiva = <strong>1.58</strong></li><li>🧾 Ejemplo: cuota 1.64 → ganancia = 0.64 → mitad = 0.32 → cuota efectiva = <strong>1.32</strong></li></ul>${ex}</div>`;
 }
 
 function noteHalfLose(pfx){
