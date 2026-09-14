@@ -939,28 +939,59 @@ function decToMomio(dec){
   return am>0?'+'+am:''+am;
 }
 
+function calcMomioHalf(mom){
+  // Calcula el momio efectivo trabajando directamente en momios
+  mom=parseFloat(mom);
+  if(isNaN(mom)) return '';
+  if(mom>0){
+    // Positivo: simplemente dividir entre 2
+    const half=Math.round(mom/2);
+    return half>0?'+'+half:''+half;
+  } else {
+    // Negativo: 1. ganancia = 100/abs(mom)  2. mitad = ganancia/2  3. momio = -100/mitad
+    const ganancia=100/Math.abs(mom);
+    const mitad=ganancia/2;
+    const momHalf=Math.round(-100/mitad);
+    return ''+momHalf;
+  }
+}
+
 function noteHalfWin(odds, pfx){
   odds=parseFloat(odds);
   const isMX=(countryMode[pfx]==='MX');
   let calcBlock='';
-  if(!isNaN(odds)&&odds>=1){
-    const half=1+(odds-1)/2;
-    if(isMX){
-      const momOrig=decToMomio(odds);
-      const momHalf=decToMomio(half);
+
+  if(isMX){
+    // Para MX usamos el momio original que está en el input
+    const momOrig=parseFloat(document.getElementById(pfx+'-odds').value);
+    if(!isNaN(momOrig)){
+      const momHalf=calcMomioHalf(momOrig);
+      const momOrigFmt=momOrig>0?'+'+momOrig:''+momOrig;
+      let pasos='';
+      if(momOrig>0){
+        pasos=`<div style="font-size:.78rem;color:var(--card-sub);margin-top:6px">${momOrigFmt} ÷ 2 = <strong style="color:#ffb747">${momHalf}</strong></div>`;
+      } else {
+        const ganancia=100/Math.abs(momOrig);
+        const mitad=ganancia/2;
+        pasos=`<div style="font-size:.78rem;color:var(--card-sub);margin-top:6px">100 ÷ ${Math.abs(momOrig)} = ${ganancia.toFixed(3)} ÷ 2 = ${mitad.toFixed(3)} → −100 ÷ ${mitad.toFixed(3)} = <strong style="color:#ffb747">${momHalf}</strong></div>`;
+      }
       calcBlock=`
         <div style="background:rgba(255,181,71,0.12);border:1px solid rgba(255,181,71,0.4);border-radius:10px;padding:14px 18px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
           <div style="text-align:center">
             <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Momio ingresado</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--card-num);letter-spacing:1px">${momOrig}</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--card-num);letter-spacing:1px">${momOrigFmt}</div>
           </div>
           <div style="font-size:1.4rem;color:var(--muted)">→</div>
           <div style="text-align:center">
             <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px">Momio efectivo</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#ffb547;letter-spacing:1px">${momHalf}</div>
+            ${pasos}
           </div>
         </div>`;
-    } else {
+    }
+  } else {
+    if(!isNaN(odds)&&odds>=1){
+      const half=1+(odds-1)/2;
       calcBlock=`
         <div style="background:rgba(255,181,71,0.12);border:1px solid rgba(255,181,71,0.4);border-radius:10px;padding:14px 18px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
           <div style="text-align:center">
@@ -982,8 +1013,8 @@ function noteHalfWin(odds, pfx){
   }
 
   const uid='hw'+Math.random().toString(36).slice(2,7);
-  const exMX=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad se calcula siempre sobre la <strong>ganancia</strong>, no sobre la cuota completa.</div><div style="white-space:nowrap;overflow:auto">🧾 momio +260 (cuota 3.60) → ganancia 2.60 → mitad 1.30 → momio efectivo <strong style="color:#ffb747">+130</strong></div></div>`;
-  const exDec=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad se calcula siempre sobre la <strong>ganancia</strong> (cuota − 1), no sobre la cuota completa.</div><div style="white-space:nowrap;overflow:auto">🧾 Cuota 2.16 → ganancia 1.16 → mitad 0.58 → cuota efectiva <strong style="color:#ffb747">1.58</strong></div><div style="white-space:nowrap;overflow:auto">🧾 Cuota 1.64 → ganancia 0.64 → mitad 0.32 → cuota efectiva <strong style="color:#ffb747">1.32</strong></div></div>`;
+  const exMX=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad siempre se calcula sobre la <strong>ganancia</strong>.</div><div>👉 Momio positivo: +260 ÷ 2 = <span style="color:#ffb747;font-weight:700">+130</span></div><div>👉 Momio negativo: 100 ÷ 150 = 0.667 ÷ 2 = 0.333 → −100 ÷ 0.333 = <span style="color:#ffb747;font-weight:700">−300</span></div></div>`;
+  const exDec=`<div style="margin-top:8px;font-size:.82rem;line-height:2"><div>La mitad siempre se calcula sobre la <strong>ganancia</strong> (cuota − 1).</div><div>🧾 2.16 − 1 = 1.16 ÷ 2 = 0.58 + 1 = <span style="color:#ffb747;font-weight:700">1.58</span></div><div>🧾 1.64 − 1 = 0.64 ÷ 2 = 0.32 + 1 = <span style="color:#ffb747;font-weight:700">1.32</span></div></div>`;
 
   return `<div class="note-box">
     <strong>⚡ GANAS LA MITAD</strong>
