@@ -694,7 +694,7 @@
       </div>
       <div class="form-group">
         <label>Ventaja</label>
-        <input type="number" inputmode="numeric" id="w-hcap" placeholder="Ej: 3" min="1" max="10" value="">
+        <input type="number" inputmode="decimal" id="w-hcap" placeholder="Ej: 3 o 2.5" min="0.5" step="0.5">
       </div>
     </div>
 
@@ -1114,9 +1114,9 @@ function calc3Way(){
   const home=parseInt(document.getElementById('w-home').value)||0;
   const away=parseInt(document.getElementById('w-away').value)||0;
   const favteam=document.getElementById('w-favteam').value;
-  const hcap=parseInt(document.getElementById('w-hcap').value);
+  const hcap=parseFloat(document.getElementById('w-hcap').value);
   const bet=document.getElementById('w-bet').value;
-  if(isNaN(hcap)||hcap<1){alert('Por favor ingresa la ventaja.');return;}
+  if(isNaN(hcap)||hcap<=0){alert('Por favor ingresa la ventaja (mínimo 0.5).');return;}
   // apply handicap: favored team gets +hcap
   let adjHome=home, adjAway=away;
   if(favteam==='home') adjHome=home+hcap;
